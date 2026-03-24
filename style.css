@@ -2820,3 +2820,104 @@ body.virus-infected {
     }
 }
 
+
+
+/* AI Camera Styles */
+.ai-camera-container {
+    background: #0a0f0c;
+    border-radius: 16px;
+    padding: 20px;
+    margin: 15px 0;
+    border: 2px solid #ff3366;
+    text-align: center;
+}
+
+.ai-video {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 12px;
+    background: #000;
+    margin: 10px auto;
+    transform: scaleX(-1); /* Зеркальное отображение */
+}
+
+.ai-canvas {
+    display: none;
+}
+
+.ai-preview {
+    margin: 15px 0;
+    padding: 10px;
+    background: #030605;
+    border-radius: 8px;
+    min-height: 60px;
+}
+
+.ai-detection-result {
+    color: #2eff7a;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.ai-capture-btn {
+    background: #ff3366;
+    border: none;
+    color: white;
+    font-family: monospace;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 12px 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+    transition: all 0.2s;
+}
+
+.ai-capture-btn:hover {
+    transform: scale(1.05);
+    background: #ff6699;
+}
+
+.ai-capture-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.ai-status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.ai-status.loading {
+    background: rgba(255, 170, 51, 0.2);
+    color: #ffaa33;
+}
+
+.ai-status.success {
+    background: rgba(46, 255, 122, 0.2);
+    color: #2eff7a;
+}
+
+.ai-status.error {
+    background: rgba(255, 51, 102, 0.2);
+    color: #ff3366;
+}
+
+.ai-loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #2eff7a;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: ai-spin 0.6s linear infinite;
+    margin-right: 8px;
+}
+
+@keyframes ai-spin {
+    to { transform: rotate(360deg); }
+}
