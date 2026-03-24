@@ -13,9 +13,9 @@
 
 {
     type: "ai_vision",
-    text: "📸 AI_SCANNER: Нужен любой телефон, чтобы перенести вирус на него",
+    text: "📸 AI_SCANNER: Нужен любой телефон, чтобы перенести вирус",
     hint: "Наведи камеру на телефон, на который отправится вирус",
-    errorMeme: "❌ ИИ НЕ РАСПОЗНАЛ ТЕЛЕФОН! Попробуй ещё раз!",
+    errorMeme: "❌ ТЕЛЕФОН НЕ РАСПОЗНАН! Попробуй ещё раз!",
     successMsg: "✅ ТЕЛЕФОН РАСПОЗНАН! ДОСТУП РАЗРЕШЁН!"
 }
 /*
@@ -583,7 +583,7 @@ function stopHackerBackground() {
                 const statusElement = document.getElementById('initStatus');
                 const codeElement = document.getElementById('initCode');
                 
-                const statusMessages = ['[ ИНИЦИАЛИЗАЯ ДАННЫХ ]', '[ ЗАГРУЗКА МОДУЛЯ ]', '[ АВТОРИЗАЦИЯ ]', '[ БАЗА ВЗЛОМАНА ]', '[ АКТИВАЦИЯ СИСТЕМЫ ]', '[ ПОДГОТОВКА К КВЕСТУ ]', '[ ПОДКЛЮЧЕНИЕ К СИСТЕМЕ ]', '[ РАСШИФРОВКА IP-АДРЕСА ]', '[ ЗАГРУЗКА ЗАВЕРШЕНА ]'];
+                const statusMessages = ['[ ИНИЦИАЛИЗАЯ ДАННЫХ ]', '[ ЗАГРУЗКА МОДУЛЯ ]', '[ АВТОРИЗАЦИЯ ]', '[ БАЗА ВЗЛОМАНА ]', '[ АКТИВАЦИЯ СИСТЕМЫ ]', '[ ПОДГОТОВКА К КВЕСТУ ]', '[ ПОДКЛЮЧЕНИЕ К СЕРВЕРУ ]', '[ РАСШИФРОВКА IP-АДРЕСА ]', '[ ЗАГРУЗКА ЗАВЕРШЕНА ]'];
                 const codeMessages = ['> ИНИЦИАЛИЗАЯ... [OK]', '> ЗАГРУЗКА МОДУЛЯ... [OK]', '> АВТОРИЗАЦИЯ... [OK]', '> БАЗА ВЗЛОМАНА... [OK]', '> АКТИВАЦИЯ... [OK]', '> ПОДГОТОВКА... [OK]', '> ПОДКЛЮЧЕНИЕ... [OK]', '> РАСШИФРОВКА IP-АДРЕСА... [OK]', '> ЗАГРУЗКА ЗАВЕРШЕНА'];
                 
                 let progress = 0;
@@ -1083,7 +1083,7 @@ else if (q.type === "ai_vision") {
             </div>
             <video id="aiVideo" class="ai-video" autoplay playsinline muted></video>
             <canvas id="aiCanvas" class="ai-canvas"></canvas>
-            <button class="ai-capture-btn" id="aiCaptureBtn">🔍 РАСПОЗНАТЬ ТЕЛЕФОН</button>
+            <button class="ai-capture-btn" id="aiCaptureBtn">🔍 РАСПОЗНАТЬ</button>
             <div class="ai-status" id="aiStatus">⚡ Загрузка ИИ модели...</div>
         </div>
         <div class="hint-text">💡 ${q.hint}</div>
