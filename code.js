@@ -1989,7 +1989,7 @@ document.getElementById('uraBtn').onclick = async () => {
             brokenDiv.innerHTML = `<div class="broken-text">⚠️SYSTEM CRASH⚠️<br>ERROR 0xFFFFFFFF<br><span style="font-size:24px;">ТЫ СЛОМАЛ САЙТ...</span><br><span style="font-size:18px;color:#ff6666;">УСТАНОВЛЕН ЗАПРЕТ</span></div>`;
             document.body.appendChild(brokenDiv);
             
-            if('vibrate' in navigator) navigator.vibrate([200, 100, 200, 100, 300]);
+            if('vibrate' in navigator) navigator.vibrate([300, 100, 300, 100, 500, 200, 300]);
             await new Promise(resolve => setTimeout(resolve, 2500));
             brokenDiv.remove();
             
