@@ -574,8 +574,8 @@ function stopHackerBackground() {
                 const statusElement = document.getElementById('initStatus');
                 const codeElement = document.getElementById('initCode');
                 
-                const statusMessages = ['[ ИНИЦИАЛИЗАЯ ДАННЫХ ]', '[ ЗАГРУЗКА МОДУЛЕЙ ]', '[ АВТОРИЗАЦИЯ ]', '[ БАЗА ВЗЛОМАНА ]', '[ АКТИВАЦИЯ СИСТЕМЫ ]', '[ ПОДГОТОВКА К КВЕСТУ ]', '[ ПОДКЛЮЧЕНИЕ К СИСТЕМЕ ]', '[ РАСШИФРОВКА IP-АДРЕСА ]', '[ ЗАГРУЗКА ЗАВЕРШЕНА ]'];
-                const codeMessages = ['> ИНИЦИАЛИЗАЯ... [OK]', '> ЗАГРУЗКА МОДУЛЕЙ... [OK]', '> АВТОРИЗАЦИЯ... [OK]', '> БАЗА ВЗЛОМАНА... [OK]', '> АКТИВАЦИЯ... [OK]', '> ПОДГОТОВКА... [OK]', '> ПОДКЛЮЧЕНИЕ... [OK]', '> РАСШИФРОВКА IP-АДРЕСА... [OK]', '> ЗАГРУЗКА ЗАВЕРШЕНА'];
+                const statusMessages = ['[ ИНИЦИАЛИЗАЯ ДАННЫХ ]', '[ ЗАГРУЗКА МОДУЛЯ ]', '[ АВТОРИЗАЦИЯ ]', '[ БАЗА ВЗЛОМАНА ]', '[ АКТИВАЦИЯ СИСТЕМЫ ]', '[ ПОДГОТОВКА К КВЕСТУ ]', '[ ПОДКЛЮЧЕНИЕ К СИСТЕМЕ ]', '[ РАСШИФРОВКА IP-АДРЕСА ]', '[ ЗАГРУЗКА ЗАВЕРШЕНА ]'];
+                const codeMessages = ['> ИНИЦИАЛИЗАЯ... [OK]', '> ЗАГРУЗКА МОДУЛЯ... [OK]', '> АВТОРИЗАЦИЯ... [OK]', '> БАЗА ВЗЛОМАНА... [OK]', '> АКТИВАЦИЯ... [OK]', '> ПОДГОТОВКА... [OK]', '> ПОДКЛЮЧЕНИЕ... [OK]', '> РАСШИФРОВКА IP-АДРЕСА... [OK]', '> ЗАГРУЗКА ЗАВЕРШЕНА'];
                 
                 let progress = 0;
                 const progressInterval = setInterval(() => {
@@ -1538,9 +1538,9 @@ async function showFinalCelebration() {
         { progress: '[█████░░░░░░░░░░░] 32%', text: 'RESTORING_CORRUPTED_FILES...' },
         { progress: '[██████████░░░░░░] 58%', text: 'RECOVERING_FRIENDSHIP_DATA...' },
         { progress: '[█████████████░░░] 79%', text: 'DECRYPTING_GIFT_COORDINATES...' },
-        { progress: '[███████████████░] 95%', text: 'DATABASE_UNLOCKED' },
-        { progress: '[████████████████] 100%', text: 'ROOT_ACCESS_GRANTED' },
-        { progress: '[████████████████] 100%', text: 'SYSTEM_RESTORED_SUCCESSFULLY!' }
+        { progress: '[███████████████░] 95%', text: 'DATABASE_UNLOCKED...' },
+        { progress: '[████████████████] 100%', text: 'ROOT_ACCESS_GRANTED...' },
+        { progress: '[████████████████] 100%', text: 'SYSTEM_RESTORED_SUCCESSFULLY!...' }
     ];
     
     for(let i = 0; i < recoverySteps.length; i++) {
