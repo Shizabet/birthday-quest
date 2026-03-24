@@ -1,7 +1,7 @@
 
  // ВОПРОСЫ КВЕСТА
         const questions = [
-           {
+          /*  {
                 type: "choice",
                 text: "СБОР ЛОГОВ: Нужны данные места обнаружения вируса. Выбери правильный адрес возраждения вируса",
                 options: ["Караваевская 28к1", "Заневский проспект 42", "пл. Стачек 5", "Парголовсккая 32"],
@@ -9,7 +9,16 @@
                 errorMeme: "❌ НЕВЕРНО! Ты точно помнишь?",
                 successMsg: "✅ ВЕРНО! Общага на стачек рулит!"
             },
-/* 
+*/
+
+{
+    type: "ai_vision",
+    text: "📸 AI_SCANNER: Сфотографируй любой телефон, чтобы подтвердить доступ",
+    hint: "Наведи камеру на телефон (iPhone, Android, любой смартфон). ИИ определит, телефон это или нет",
+    errorMeme: "❌ ИИ НЕ РАСПОЗНАЛ ТЕЛЕФОН! Попробуй ещё раз!",
+    successMsg: "✅ ТЕЛЕФОН РАСПОЗНАН! ДОСТУП РАЗРЕШЁН!"
+}
+/*
             {
                 type: "qr",
                 text: "🔓 QR_HACK_SCANNER: Отсканируй QR-код и введи расшифрованное сообщение",
@@ -31,7 +40,7 @@
                 errorMeme: "❌ НЕВЕРНО! Попробуй прослушать еще раз",
                 successMsg: "✅ ВЕРНО! Это песня 'С днем рождения'!"
             },
-            */
+            
             {
                 type: "qr",
                 text: "🔍 QR_CITY: Отсканируй QR-код с координатами и напиши название города",
@@ -982,6 +991,12 @@ function removeHackerTopPanel() {
         
         // ОТРИСОВКА ТЕКУЩЕГО ВОПРОСА
         async function renderCurrent() {
+
+            if (window.aiCameraCleanup) {
+        window.aiCameraCleanup();
+        window.aiCameraCleanup = null;
+    }
+
             if (currentIndex >= questions.length) {
                 stopHackBackgroundAnimations();
                 quizContainer.style.display = 'none';
@@ -1056,6 +1071,205 @@ else if (q.type === "audio") {
         </div>
         <div class="hint-text">💡 ${q.hint}</div>
     `;
+}
+
+else if (q.type === "ai_vision") {
+    html += `
+        <div class="ai-camera-container">
+            <div class="ai-preview">
+                <div class="ai-detection-result" id="aiDetectionResult">
+                    📸 Наведи камеру на телефон
+                </div>
+            </div>
+            <video id="aiVideo" class="ai-video" autoplay playsinline muted></video>
+            <canvas id="aiCanvas" class="ai-canvas"></canvas>
+            <button class="ai-capture-btn" id="aiCaptureBtn">🔍 РАСПОЗНАТЬ ТЕЛЕФОН</button>
+            <div class="ai-status" id="aiStatus">⚡ Загрузка ИИ модели...</div>
+        </div>
+        <div class="hint-text">💡 ${q.hint}</div>
+    `;
+    
+    setTimeout(async () => {
+        const video = document.getElementById('aiVideo');
+        const canvas = document.getElementById('aiCanvas');
+        const captureBtn = document.getElementById('aiCaptureBtn');
+        const statusDiv = document.getElementById('aiStatus');
+        const resultDiv = document.getElementById('aiDetectionResult');
+        
+        let model = null;
+        let stream = null;
+        let isProcessing = false;
+        
+        // Список объектов, которые считаются телефонами
+        const phoneClasses = ['cell phone', 'smartphone', 'mobile phone', 'phone'];
+        
+        // Функция инициализации камеры
+        async function initCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        facingMode: 'environment', // Задняя камера
+                        width: { ideal: 640 },
+                        height: { ideal: 480 }
+                    } 
+                });
+                video.srcObject = stream;
+                await video.play();
+                statusDiv.innerHTML = '✅ Камера готова! Наведи на телефон и нажми "РАСПОЗНАТЬ"';
+                statusDiv.className = 'ai-status success';
+                return true;
+            } catch (err) {
+                console.error('Camera error:', err);
+                statusDiv.innerHTML = '❌ Не удалось получить доступ к камере! Проверь разрешения.';
+                statusDiv.className = 'ai-status error';
+                return false;
+            }
+        }
+        
+        // Функция загрузки модели
+        async function loadModel() {
+            try {
+                statusDiv.innerHTML = '<span class="ai-loading"></span> Загрузка ИИ модели...';
+                statusDiv.className = 'ai-status loading';
+                model = await cocoSsd.load();
+                statusDiv.innerHTML = '✅ Модель загружена! Камера готова.';
+                statusDiv.className = 'ai-status success';
+                return true;
+            } catch (err) {
+                console.error('Model load error:', err);
+                statusDiv.innerHTML = '❌ Ошибка загрузки ИИ модели!';
+                statusDiv.className = 'ai-status error';
+                return false;
+            }
+        }
+        
+        // Функция распознавания
+        async function detectPhone() {
+            if (isProcessing) {
+                statusDiv.innerHTML = '⏳ Обработка... Подожди секунду';
+                return;
+            }
+            
+            if (!model) {
+                statusDiv.innerHTML = '❌ Модель ещё не загружена!';
+                return;
+            }
+            
+            if (!video.videoWidth || !video.videoHeight) {
+                statusDiv.innerHTML = '❌ Камера не готова!';
+                return;
+            }
+            
+            isProcessing = true;
+            captureBtn.disabled = true;
+            statusDiv.innerHTML = '<span class="ai-loading"></span> Анализ изображения...';
+            statusDiv.className = 'ai-status loading';
+            
+            try {
+                // Рисуем текущий кадр на canvas
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                // Распознаём объекты
+                const predictions = await model.detect(canvas);
+                
+                // Ищем телефон
+                let foundPhone = false;
+                let detectedObjects = [];
+                
+                for (let pred of predictions) {
+                    const className = pred.class.toLowerCase();
+                    detectedObjects.push(className);
+                    
+                    // Проверяем, является ли объект телефоном
+                    for (let phoneClass of phoneClasses) {
+                        if (className.includes(phoneClass) || phoneClass.includes(className)) {
+                            foundPhone = true;
+                            break;
+                        }
+                    }
+                    
+                    if (foundPhone) break;
+                }
+                
+                if (foundPhone) {
+                    resultDiv.innerHTML = `✅ РАСПОЗНАНО: Телефон! (${predictions.filter(p => p.class.toLowerCase().includes('phone')).map(p => p.class).join(', ') || 'смартфон'})`;
+                    statusDiv.innerHTML = '✅ ТЕЛЕФОН ОБНАРУЖЕН! Доступ разрешён!';
+                    statusDiv.className = 'ai-status success';
+                    
+                    // Эффект успеха
+                    captureBtn.style.background = '#2eff7a';
+                    captureBtn.style.color = '#000';
+                    
+                    // Звук успеха
+                    try {
+                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                        const osc = audioCtx.createOscillator();
+                        const gain = audioCtx.createGain();
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.frequency.value = 880;
+                        gain.gain.value = 0.2;
+                        osc.start();
+                        gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
+                        osc.stop(audioCtx.currentTime + 0.3);
+                    } catch(e) {}
+                    
+                    // Вибрация (если доступна)
+                    if (navigator.vibrate) navigator.vibrate(200);
+                    
+                    showMessage(q.successMsg);
+                    setTimeout(() => {
+                        currentIndex++;
+                        renderCurrent();
+                    }, 1500);
+                    
+                } else {
+                    resultDiv.innerHTML = `❌ Телефон не найден. Обнаружено: ${detectedObjects.length > 0 ? detectedObjects.join(', ') : 'ничего'}. Попробуй ещё раз!`;
+                    statusDiv.innerHTML = '❌ Телефон не распознан! Наведи камеру чётче.';
+                    statusDiv.className = 'ai-status error';
+                    captureBtn.disabled = false;
+                    
+                    // Эффект ошибки
+                    captureBtn.style.animation = 'shake 0.3s ease';
+                    setTimeout(() => captureBtn.style.animation = '', 300);
+                }
+                
+            } catch (err) {
+                console.error('Detection error:', err);
+                statusDiv.innerHTML = '❌ Ошибка распознавания! Попробуй ещё раз.';
+                statusDiv.className = 'ai-status error';
+                captureBtn.disabled = false;
+            } finally {
+                isProcessing = false;
+                if (!foundPhone) {
+                    captureBtn.disabled = false;
+                    captureBtn.style.background = '';
+                }
+            }
+        }
+        
+        // Инициализация
+        const cameraReady = await initCamera();
+        if (cameraReady) {
+            await loadModel();
+        }
+        
+        captureBtn.onclick = detectPhone;
+        
+        // Очистка при выходе
+        const cleanup = () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+        };
+        
+        // Сохраняем cleanup для очистки
+        window.aiCameraCleanup = cleanup;
+        
+    }, 100);
 }
             // Hash cracking
             else if (q.type === "hash") {
