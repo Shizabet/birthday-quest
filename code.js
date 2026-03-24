@@ -1,7 +1,7 @@
 
  // ВОПРОСЫ КВЕСТА
         const questions = [
-            {
+           {
                 type: "choice",
                 text: "СБОР ЛОГОВ: Нужны данные места обнаружения вируса. Выбери правильный адрес возраждения вируса",
                 options: ["Караваевская 28к1", "Заневский проспект 42", "пл. Стачек 5", "Парголовсккая 32"],
@@ -9,54 +9,58 @@
                 errorMeme: "❌ НЕВЕРНО! Ты точно помнишь?",
                 successMsg: "✅ ВЕРНО! Общага на стачек рулит!"
             },
-/*
-{
-    type: "qr",
-    text: "🔓 QR_HACK_SCANNER: Отсканируй QR-код и введи расшифрованное сообщение",
-    mediaUrl: "https://quickchart.io/qr?text=PISKA_POPKA&size=300&dark=ff3366&light=000000&margin=2",
-    mediaCaption: "💀 QR-КОД СОДЕРЖИТ СЕКРЕТНЫЙ КЛЮЧ 💀",
-    expectedInput: "PISKA_POPKA",
-    hint: "Отсканируй QR-код и введи текст, который увидишь",
-    errorMeme: "❌ QR-КОД НЕ РАСПОЗНАН! ДОСТУП ЗАПРЕЩЕН!",
-    successMsg: "✅ QR-КОД УСПЕШНО РАСШИФРОВАН! ДОСТУП РАЗРЕШЕН!"
-}
+/* 
+            {
+                type: "qr",
+                text: "🔓 QR_HACK_SCANNER: Отсканируй QR-код и введи расшифрованное сообщение",
+                mediaUrl: "https://quickchart.io/qr?text=PISKA_POPKA&size=300&dark=ff3366&light=000000&margin=2",
+                mediaCaption: "💀 QR-КОД СОДЕРЖИТ СЕКРЕТНЫЙ КЛЮЧ 💀",
+                expectedInput: "PISKA_POPKA",
+                hint: "Отсканируй QR-код и введи текст, который увидишь",
+                errorMeme: "❌ QR-КОД НЕ РАСПОЗНАН! ДОСТУП ЗАПРЕЩЕН!",
+                successMsg: "✅ QR-КОД УСПЕШНО РАСШИФРОВАН! ДОСТУП РАЗРЕШЕН!"
+            },
 
-{
-    type: "audio",
-    text: "🎵 MUSIC_QUIZ: Прослушай трек и напиши его название",
-    audioUrl: "music.mp3",
-    audioCaption: "🎧 УГАДАЙ МЕЛОДИЮ 🎧\n[ПОДСКАЗКА: это песня про день рождения]",
-    expectedInput: "С днем рождения",
-    hint: "Эту песню поют на всех днях рождения",
-    errorMeme: "❌ НЕВЕРНО! Попробуй прослушать еще раз",
-    successMsg: "✅ ВЕРНО! Это песня 'С днем рождения'!"
-}
-    */
-{
-    type: "qr",
-    text: "🔍 QR_CITY: Отсканируй QR-код с координатами и напиши название города",
-    mediaUrl: "https://quickchart.io/qr?text=48.480223,135.071915&size=300&dark=ff3366&light=000000&margin=2",
-    mediaCaption: "🗺️ QR-КОД СОДЕРЖИТ КООРДИНАТЫ ГОРОДА",
-    expectedInput: "Хабаровск",
-    hint: "Удачи в поисках",
-    errorMeme: "❌ НЕВЕРНО! Проверь координаты и найди город на карте",
-    successMsg: "✅ ВЕРНО! Это Хабаровск!"
-},
-{
-    type: "media",
-    mediaType: "image",
-    mediaUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/友-order.gif/250px-友-order.gif",
-    mediaCaption: "💀 ПЕРЕХВАТЧЕН ИЕРОГЛИФ 💀",
-    text: "🔓 ЧТО ОЗНАЧАЕТ ЭТОТ ИЕРОГЛИФ?",
-    options: ["Друг", "Любовь", "Семья", "Мир"],
-    correct: "Друг",
-    errorMeme: "❌ НЕВЕРНО! 朋友 — это 'ДРУГ'",
-    successMsg: "✅ ВЕРНО! 朋友 = ДРУГ!"
-}
-    
+            {
+                type: "audio",
+                text: "🎵 MUSIC_QUIZ: Прослушай трек и напиши его название",
+                audioUrl: "music.mp3",
+                audioCaption: "🎧 УГАДАЙ МЕЛОДИЮ 🎧\n[ПОДСКАЗКА: это песня про день рождения]",
+                expectedInput: "С днем рождения",
+                hint: "Эту песню поют на всех днях рождения",
+                errorMeme: "❌ НЕВЕРНО! Попробуй прослушать еще раз",
+                successMsg: "✅ ВЕРНО! Это песня 'С днем рождения'!"
+            },
+            */
+            {
+                type: "qr",
+                text: "🔍 QR_CITY: Отсканируй QR-код с координатами и напиши название города",
+                mediaUrl: "https://quickchart.io/qr?text=48.480223,135.071915&size=300&dark=ff3366&light=000000&margin=2",
+                mediaCaption: "🗺️ QR-КОД СОДЕРЖИТ КООРДИНАТЫ ГОРОДА",
+                expectedInput: "Хабаровск",
+                hint: "Удачи в поисках",
+                errorMeme: "❌ НЕВЕРНО! Проверь координаты и найди город на карте",
+                successMsg: "✅ ВЕРНО! Это Хабаровск!"
+            }
+            /*,
 
-/*
-                 
+            {
+                type: "media",
+                mediaType: "image",
+                mediaUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/友-order.gif/250px-友-order.gif",
+                mediaCaption: "💀 ПЕРЕХВАТЧЕН ИЕРОГЛИФ 💀",
+                text: "🔓 ЧТО ОЗНАЧАЕТ ЭТОТ ИЕРОГЛИФ?",
+                options: ["Друг", "Любовь", "Семья", "Мир"],
+                correct: "Друг",
+                errorMeme: "❌ НЕВЕРНО! 朋友 — это 'ДРУГ'",
+                successMsg: "✅ ВЕРНО! 朋友 = ДРУГ!"
+            }
+                
+            */
+
+            
+
+            /*
             {
                 type: "sql",
                 text: "SQL_INJECTION: База данных заблокирована. Необходим вывод данных из базы пользователя",
@@ -67,7 +71,6 @@
                 errorMeme: "💾 SQL ERROR! База не поддалась...",
                 successMsg: "💾 SQL INJECTION УСПЕШНА! Доступ получен!"
             },
-       
             
             {
                 type: "hash",
@@ -78,6 +81,7 @@
                 errorMeme: "🔐 ХЕШ НЕ РАСШИФРОВАН!",
                 successMsg: "🔐 ХЕШ ВЗЛОМАН!"
             },
+
             {
                 type: "choice",
                 text: "АНАЛИЗ СБОЕВ: Что стало причиной легендарного бага в продакшене?",
@@ -86,6 +90,7 @@
                 errorMeme: "💀 ОШИБКА! git push --force — это больно",
                 successMsg: "✅ ДА! Мы это никогда не забудем"
             },
+
             {
                 type: "binary",
                 text: "BINARY_DECODER: Расшифруй бинарный код:",
@@ -95,6 +100,7 @@
                 errorMeme: "💻 НЕВЕРНО! Попробуй перевести в текст (имя именинника)",
                 successMsg: "💻 ДЕКОДИРОВАНО! Это имя именинника!"
             },
+
             {
                 type: "input",
                 text: "РАСШИФРОВКА МЕМА: Наша общая фраза, когда всё падает?",
@@ -116,6 +122,7 @@
                 errorMeme: "💢 НЕВЕРНЫЙ PIN! Доступ закрыт на 30 секунд",
                 successMsg: "🔓 PIN ПРИНЯТ! ДОСТУП РАЗРЕШЁН!"
             },
+
             {
                 type: "media",
                 mediaType: "video",
@@ -127,6 +134,7 @@
                 errorMeme: "🎬 ПЕРЕСМОТРИ ВИДЕО!",
                 successMsg: "🎬 ТОЧНО! ЭТО БЫЛ ЛЕГЕНДАРНЫЙ ДЕПЛОЙ!"
             },
+            
             {
                 type: "debug",
                 text: "DEBUG_ALERT: Найди и исправь ошибку в коде, чтобы функция вернула сумму:",
@@ -197,7 +205,7 @@
         let captchaAttempts = 0;
         const MAX_ATTEMPTS = 3;
 
-        
+        let globalCelebrationInterval = null;
         
         function generateCaptchaQuestion() {
             const questions = [
@@ -554,7 +562,7 @@ function stopHackerBackground() {
                 terminal.innerHTML = `
                     <div class="init-title">⚠️QUEST_INITIALIZATION⚠️</div>
                     <div class="init-progress-container"><div class="init-progress-fill" id="initProgressFill"></div></div>
-                    <div class="init-status" id="initStatus">[ INITIALIZING_HACK_ENVIRONMENT ]</div>
+                    <div class="init-status" id="initStatus">[ ВЫПОЛНЯЕТСЯ ВХОД ]</div>
                     <div class="init-code" id="initCode">> ЗАГРУЗКА ДАННЫХ...<br>> ПРОВЕРКА ПОДКЛЮЧЕНИЯ...</div>
                 `;
                 
@@ -567,7 +575,7 @@ function stopHackerBackground() {
                 const codeElement = document.getElementById('initCode');
                 
                 const statusMessages = ['[ ИНИЦИАЛИЗАЯ ДАННЫХ ]', '[ ЗАГРУЗКА МОДУЛЕЙ ]', '[ АВТОРИЗАЦИЯ ]', '[ БАЗА ВЗЛОМАНА ]', '[ АКТИВАЦИЯ СИСТЕМЫ ]', '[ ПОДГОТОВКА К КВЕСТУ ]', '[ ПОДКЛЮЧЕНИЕ К СИСТЕМЕ ]', '[ РАСШИФРОВКА IP-АДРЕСА ]', '[ ЗАГРУЗКА ЗАВЕРШЕНА ]'];
-                const codeMessages = ['> ИНИЦИАЛИЗАЯ ДАННЫХ... [OK]', '> ЗАГРУЗКА МОДУЛЕЙ... [OK]', '> АВТОРИЗАЦИЯ... [OK]', '> БАЗА ВЗЛОМАНА... [OK]', '> АКТИВАЦИЯ СИСТЕМЫ... [OK]', '> ПОДГОТОВКА К КВЕСТУ... [OK]', '> ПОДКЛЮЧЕНИЕ К СИСТЕМЕ... [OK]', '> РАСШИФРОВКА IP-АДРЕСА... [OK]', '> ЗАГРУЗКА ЗАВЕРШЕНА'];
+                const codeMessages = ['> ИНИЦИАЛИЗАЯ... [OK]', '> ЗАГРУЗКА МОДУЛЕЙ... [OK]', '> АВТОРИЗАЦИЯ... [OK]', '> БАЗА ВЗЛОМАНА... [OK]', '> АКТИВАЦИЯ... [OK]', '> ПОДГОТОВКА... [OK]', '> ПОДКЛЮЧЕНИЕ... [OK]', '> РАСШИФРОВКА IP-АДРЕСА... [OK]', '> ЗАГРУЗКА ЗАВЕРШЕНА'];
                 
                 let progress = 0;
                 const progressInterval = setInterval(() => {
@@ -931,7 +939,7 @@ function removeHackerTopPanel() {
                             clearInterval(captchaMatrixInterval);
                             captchaContainer.remove();
                             resolve();
-                        }, 1500);
+                        }, 500);
                     } else {
                         captchaAttempts++;
                         const remaining = MAX_ATTEMPTS - captchaAttempts;
@@ -1349,153 +1357,316 @@ else if (q.type === "audio") {
         renderCurrent();
     });
 }
-        
-        async function showFinalCelebration() {
-            stopHackerBackground();
-            if (mediaGlitchInterval) clearInterval(mediaGlitchInterval);
-            
-            removeHackerTopPanel();
 
-            quizContainer.style.display = 'none';
-            birthdayPage.style.display = 'flex';
-            birthdayPage.style.opacity = '1';
-            birthdayPage.innerHTML = '';
-            birthdayPage.style.background = '#000000';
-            
-            const recoveryContainer = document.createElement('div');
-            recoveryContainer.style.cssText = `position:fixed;top:0;left:0;width:100%;height:100vh;background:#000;z-index:2000;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:monospace;`;
-            document.body.appendChild(recoveryContainer);
-            
-            const recoveryMatrix = document.createElement('div');
-            recoveryMatrix.style.cssText = `position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;`;
-            recoveryContainer.appendChild(recoveryMatrix);
-            
-            function addRecoveryLine() {
-                const line = document.createElement('div');
-                line.style.cssText = `position:absolute;color:#2eff7a;font-family:monospace;font-size:${Math.random()*16+10}px;white-space:nowrap;left:${Math.random()*100}%;animation:recoveryFall ${Math.random()*3+2}s linear forwards;text-shadow:0 0 5px #2eff7a;top:-30px;`;
-                const texts = ['🔄 SYSTEM_RECOVERY...', '✅ MEMORY_RESTORE...', '🔧 FIXING_FILES...', '💾 RESTORING_DATA...', '🎁 LOCATING_GIFT...', '✨ RECOVERY_COMPLETE...'];
-                line.textContent = texts[Math.floor(Math.random() * texts.length)];
-                recoveryMatrix.appendChild(line);
-                setTimeout(() => line.remove(), 4000);
+
+async function showFinalCelebration() {
+    stopHackerBackground();
+    if (mediaGlitchInterval) clearInterval(mediaGlitchInterval);
+    
+    removeHackerTopPanel();
+
+    if (balloonInterval) {
+        clearInterval(balloonInterval);
+        balloonInterval = null;
+    }
+    if (confettiInterval) {
+        clearInterval(confettiInterval);
+        confettiInterval = null;
+    }
+    if (starInterval) {
+        clearInterval(starInterval);        starInterval = null;
+    }
+    if (cakeInterval) {
+        clearInterval(cakeInterval);
+        cakeInterval = null;
+    }
+    if (giftInterval) {
+        clearInterval(giftInterval);
+        giftInterval = null;
+    }
+    
+ if (globalCelebrationInterval) {
+        clearInterval(globalCelebrationInterval);
+        globalCelebrationInterval = null;
+    }
+
+    // Очищаем все существующие шарики и конфетти на странице
+    const existingBalloons = document.querySelectorAll('.balloon, .confetti, .cake, .gift, .star');
+    existingBalloons.forEach(el => el.remove());
+    
+
+    quizContainer.style.display = 'none';
+    birthdayPage.style.display = 'flex';
+    birthdayPage.style.opacity = '1';
+    birthdayPage.innerHTML = '';
+    birthdayPage.style.background = '#000000';
+    
+    // ========== ВСПЛЫВАЮЩЕЕ ОКНО "КАПЧА ПРОЙДЕНА" ==========
+    
+    const popup = document.createElement('div');
+    popup.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, #0a2a1a, #051a0a);
+        border: 3px solid #2eff7a;
+        border-radius: 30px;
+        padding: 40px 60px;
+        text-align: center;
+        z-index: 10000;
+        box-shadow: 0 0 50px rgba(46, 255, 122, 0.5);
+        animation: popupAppear 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+        font-family: monospace;
+    `;
+    
+    popup.innerHTML = `
+        <div style="font-size: 80px; animation: checkBounce 0.5s ease;">✅</div>
+        <div style="font-size: 32px; color: #2eff7a; font-weight: bold; margin-top: 15px;">
+            ПРОВЕРКА ПРОЙДЕНА!
+        </div>
+        <div style="font-size: 14px; color: #88ffaa; margin-top: 10px;">
+            [ ДОСТУП РАЗРЕШЁН ]
+        </div>
+    `;
+    
+    document.body.appendChild(popup);
+    
+    // Анимации
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes popupAppear {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.3);
             }
-            
-            const style = document.createElement('style');
-            style.textContent = `@keyframes recoveryFall{0%{transform:translateY(-30px);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(100vh);opacity:0}}`;
-            document.head.appendChild(style);
-            
-            const recoveryInterval = setInterval(() => {
-                if (recoveryContainer && document.body.contains(recoveryContainer)) {
-                    for(let i = 0; i < 5; i++) addRecoveryLine();
-                }
-            }, 200);
-            
-            const statusBox = document.createElement('div');
-            statusBox.style.cssText = `position:relative;z-index:10;background:#0a0c0f;border:2px solid #2eff7a;padding:30px 50px;text-align:center;border-radius:12px;box-shadow:0 0 30px rgba(46,255,122,0.3);`;
-            statusBox.innerHTML = `<div style="color:#2eff7a;font-size:24px;margin-bottom:15px;">⚠️SYSTEM_RECOVERY⚠️</div><div id="recoveryStatus" style="color:#88ffaa;font-size:18px;margin-bottom:20px;">[░░░░░░░░░░░░░░░░] 0%</div><div style="color:#66ff99;font-size:14px;">ВОССТАНОВЛЕНИЕ ВОСПОМИНАНИЙ...</div>`;
-            recoveryContainer.appendChild(statusBox);
-            
-            const recoverySteps = [
-                { progress: '[██░░░░░░░░░░░░░░] 15%', text: 'SCANNING_MEMORY_SECTORS...' },
-                { progress: '[█████░░░░░░░░░░░] 32%', text: 'RESTORING_CORRUPTED_FILES...' },
-                { progress: '[██████████░░░░░░] 58%', text: 'RECOVERING_FRIENDSHIP_DATA...' },
-                { progress: '[█████████████░░░] 79%', text: 'DECRYPTING_GIFT_COORDINATES...' },
-                { progress: '[███████████████░] 95%', text: 'SYSTEM_RESTORED_SUCCESSFULLY!' },
-                { progress: '[████████████████] 100%', text: 'SYSTEM_RESTORED_SUCCESSFULLY!' }
-            ];
-            
-            for(let i = 0; i < recoverySteps.length; i++) {
-                await new Promise(resolve => setTimeout(resolve, 1200));
-                const statusElement_rec = document.getElementById('recoveryStatus');
-                if (statusElement_rec) {
-                    statusElement_rec.textContent = recoverySteps[i].progress;
-                    const textDiv = statusBox.querySelector('div:last-child');
-                    if (textDiv) textDiv.textContent = recoverySteps[i].text;
-                }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
             }
-            
-            statusBox.style.borderColor = '#ffaa33';
-            statusBox.innerHTML = `<div style="color:#ffaa33;font-size:26px;margin-bottom:15px;">✅RECOVERY_COMPLETE✅</div><div style="color:#88ffaa;font-size:16px;">СИСТЕМА ВОССТАНОВЛЕНА</div><div style="color:#2eff7a;font-size:14px;margin-top:15px;">ДОСТУП К ПОДАРКУ РАЗРЕШЁН</div>`;
-            
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            clearInterval(recoveryInterval);
-            recoveryContainer.remove();
-            style.remove();
-            
-            birthdayPage.style.background = 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)';
-            
-            for(let i = 0; i < 120; i++) {
+        }
+        
+        @keyframes checkBounce {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes popupFadeOut {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.8);
+                visibility: hidden;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Звук успеха (простой)
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.frequency.value = 880;
+        gainNode.gain.value = 0.2;
+        oscillator.start();
+        gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.5);
+        oscillator.stop(audioCtx.currentTime + 0.5);
+    } catch(e) {}
+    
+    // Вибрация
+    if (navigator.vibrate) navigator.vibrate(100);
+    
+    // Ждём 1.5 секунды и убираем окно
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    popup.style.animation = 'popupFadeOut 0.3s ease forwards';
+    await new Promise(resolve => setTimeout(resolve, 300));
+    popup.remove();
+    style.remove();
+    
+    // ========== АНИМАЦИЯ ВОССТАНОВЛЕНИЯ ==========
+    
+    const recoveryContainer = document.createElement('div');
+    recoveryContainer.style.cssText = `position:fixed;top:0;left:0;width:100%;height:100vh;background:#000;z-index:2000;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:monospace;`;
+    document.body.appendChild(recoveryContainer);
+    
+    const recoveryMatrix = document.createElement('div');
+    recoveryMatrix.style.cssText = `position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;`;
+    recoveryContainer.appendChild(recoveryMatrix);
+    
+    function addRecoveryLine() {
+        const line = document.createElement('div');
+        line.style.cssText = `position:absolute;color:#2eff7a;font-family:monospace;font-size:${Math.random()*16+10}px;white-space:nowrap;left:${Math.random()*100}%;animation:recoveryFall ${Math.random()*3+2}s linear forwards;text-shadow:0 0 5px #2eff7a;top:-30px;`;
+        const texts = ['🔄 SYSTEM_RECOVERY...', '✅ MEMORY_RESTORE...', '🔧 FIXING_FILES...', '💾 RESTORING_DATA...', '🎁 LOCATING_GIFT...', '✨ RECOVERY_COMPLETE...'];
+        line.textContent = texts[Math.floor(Math.random() * texts.length)];
+        recoveryMatrix.appendChild(line);
+        setTimeout(() => line.remove(), 4000);
+    }
+    
+    const fallStyle = document.createElement('style');
+    fallStyle.textContent = `@keyframes recoveryFall{0%{transform:translateY(-30px);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(100vh);opacity:0}}`;
+    document.head.appendChild(fallStyle);
+    
+    const recoveryInterval = setInterval(() => {
+        if (recoveryContainer && document.body.contains(recoveryContainer)) {
+            for(let i = 0; i < 5; i++) addRecoveryLine();
+        }
+    }, 200);
+    
+    const statusBox = document.createElement('div');
+    statusBox.style.cssText = `position:relative;z-index:10;background:#0a0c0f;border:2px solid #2eff7a;padding:30px 50px;text-align:center;border-radius:12px;box-shadow:0 0 30px rgba(46,255,122,0.3);`;
+    statusBox.innerHTML = `<div style="color:#2eff7a;font-size:24px;margin-bottom:15px;">⚠️SYSTEM_RECOVERY⚠️</div><div id="recoveryStatus" style="color:#88ffaa;font-size:18px;margin-bottom:20px;">[░░░░░░░░░░░░░░░░] 0%</div><div style="color:#66ff99;font-size:14px;">ВОССТАНОВЛЕНИЕ ВОСПОМИНАНИЙ...</div>`;
+    recoveryContainer.appendChild(statusBox);
+    
+    const recoverySteps = [
+        { progress: '[██░░░░░░░░░░░░░░] 15%', text: 'SCANNING_MEMORY_SECTORS...' },
+        { progress: '[█████░░░░░░░░░░░] 32%', text: 'RESTORING_CORRUPTED_FILES...' },
+        { progress: '[██████████░░░░░░] 58%', text: 'RECOVERING_FRIENDSHIP_DATA...' },
+        { progress: '[█████████████░░░] 79%', text: 'DECRYPTING_GIFT_COORDINATES...' },
+        { progress: '[███████████████░] 95%', text: 'DATABASE_UNLOCKED' },
+        { progress: '[████████████████] 100%', text: 'ROOT_ACCESS_GRANTED' },
+        { progress: '[████████████████] 100%', text: 'SYSTEM_RESTORED_SUCCESSFULLY!' }
+    ];
+    
+    for(let i = 0; i < recoverySteps.length; i++) {
+        await new Promise(resolve => setTimeout(resolve, 1200));
+        const statusElement_rec = document.getElementById('recoveryStatus');
+        if (statusElement_rec) {
+            statusElement_rec.textContent = recoverySteps[i].progress;
+            const textDiv = statusBox.querySelector('div:last-child');
+            if (textDiv) textDiv.textContent = recoverySteps[i].text;
+        }
+    }
+    
+    statusBox.style.borderColor = '#ffaa33';
+    statusBox.innerHTML = `<div style="color:#ffaa33;font-size:26px;margin-bottom:15px;">✅RECOVERY_COMPLETE✅</div><div style="color:#88ffaa;font-size:16px;">СИСТЕМА ВОССТАНОВЛЕНА</div><div style="color:#2eff7a;font-size:14px;margin-top:15px;">ДОСТУП К ПОДАРКУ РАЗРЕШЁН</div>`;
+    
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    clearInterval(recoveryInterval);
+    recoveryContainer.remove();
+    fallStyle.remove();
+    
+    // ========== ФИНАЛЬНОЕ ПОЗДРАВЛЕНИЕ ==========
+    
+    birthdayPage.style.background = 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)';
+    
+    startInfiniteBalloons();
+    startInfiniteConfetti();
+    startInfiniteStars();
+    startInfiniteCakes();
+    startInfiniteGifts();
+
+    globalCelebrationInterval = setInterval(() => {
+        const birthdayPageEl = document.getElementById('birthdayPage');
+        if (birthdayPageEl && birthdayPageEl.style.display !== 'none' && birthdayPageEl.style.opacity !== '0') {
+            const balloonCount = Math.floor(Math.random() * 2) + 1;
+            for (let i = 0; i < balloonCount; i++) {
                 setTimeout(() => {
                     const balloon = document.createElement('div');
                     balloon.className = 'balloon';
-                    balloon.textContent = ['🎈','🎈','🎈','🎈','🎈','🎉','🎊','🎂','🎁','✨','🎀','💝'][Math.floor(Math.random()*12)];
+                    const emojis = ['🎈', '🎈', '🎈', '🎈', '🎈', '🎉', '🎊'];
+                    balloon.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                     balloon.style.left = Math.random() * 100 + '%';
-                    balloon.style.bottom = '-50px';
-                    balloon.style.fontSize = (Math.random() * 50 + 30) + 'px';
-                    balloon.style.animationDuration = (Math.random() * 6 + 4) + 's';
-                    birthdayPage.appendChild(balloon);
-                    setTimeout(() => balloon.remove(), 10000);
-                }, i * 25);
+                    balloon.style.bottom = '-80px';
+                    const size = Math.random() * 50 + 30;
+                    balloon.style.fontSize = size + 'px';
+                    const duration = Math.random() * 6 + 5;
+                    balloon.style.animation = `floatUpFromBottom ${duration}s linear forwards`;
+                    birthdayPageEl.appendChild(balloon);
+                    setTimeout(() => balloon.remove(), duration * 1000);
+                }, i * 200);
             }
-            
-            for(let i = 0; i < 200; i++) {
+            for (let i = 0; i < 2; i++) {
                 setTimeout(() => {
-                    const conf = document.createElement('div');
-                    conf.className = 'confetti';
-                    conf.style.left = Math.random() * 100 + '%';
-                    conf.style.top = '-30px';
-                    conf.style.background = `hsl(${Math.random() * 360}, 100%, 65%)`;
-                    conf.style.width = (Math.random() * 12 + 6) + 'px';
-                    conf.style.height = (Math.random() * 12 + 6) + 'px';
-                    conf.style.animationDuration = (Math.random() * 4 + 2) + 's';
-                    birthdayPage.appendChild(conf);
-                    setTimeout(() => conf.remove(), 6000);
-                }, i * 18);
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-30px';
+                    confetti.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+                    confetti.style.width = (Math.random() * 12 + 6) + 'px';
+                    confetti.style.height = (Math.random() * 12 + 6) + 'px';
+                    const duration = Math.random() * 4 + 3;
+                    confetti.style.animation = `confettiFallDown ${duration}s linear forwards`;
+                    birthdayPageEl.appendChild(confetti);
+                    setTimeout(() => confetti.remove(), duration * 1000);
+                }, i * 150);
             }
-            
-            const card = document.createElement('div');
-            card.className = 'birthday-card';
-            card.style.padding = '25px 35px';
-            card.style.width = '450px';
-            card.style.maxWidth = '85%';
-            card.innerHTML = `
-                <div style="font-size:50px;margin-bottom:10px;">🎉✅🎂🔧</div>
-                <h1 style="font-size:28px;margin-bottom:10px;background:linear-gradient(135deg,#00aa66,#ff66cc);-webkit-background-clip:text;background-clip:text;color:transparent;">САЙТ ВОССТАНОВЛЕН!</h1>
-                <p style="font-size:14px;margin-bottom:15px;color:#ff6699;">🎁 <strong>УРА! У ТЕБЯ БУДЕТ ПОДАРОК!</strong> 🎁</p>
-                <div style="background:#ffecb3;border-radius:20px;padding:12px;margin:15px 0;"><p style="font-size:13px;color:#aa66cc;margin:0;">📍 <strong>КООРДИНАТЫ ПОДАРКА:</strong><br>🔥 <em>Место .........</em> 🔥</p></div>
-                <button class="ura-btn" id="restartGameBtn" style="padding:10px 30px;font-size:18px;background:linear-gradient(135deg,#00aa66,#44ffaa);">🎈 С ДНЕМ  РОЖДЕНИЯ! 🎈</button>
-            `;
-            birthdayPage.appendChild(card);
+        }
+    }, 3000);
 
-             // ========== ДОБАВЛЯЕМ АУДИО-ПЛЕЕР С АВТОЗАПУСКОМ ==========
+    for(let i = 0; i < 120; i++) {
+        setTimeout(() => {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.textContent = ['🎈','🎈','🎈','🎈','🎈','🎉','🎊','🎂','🎁','✨','🎀','💝'][Math.floor(Math.random()*12)];
+            balloon.style.left = Math.random() * 100 + '%';
+            balloon.style.bottom = '-50px';
+            balloon.style.fontSize = (Math.random() * 50 + 30) + 'px';
+            balloon.style.animationDuration = (Math.random() * 6 + 4) + 's';
+            birthdayPage.appendChild(balloon);
+            setTimeout(() => balloon.remove(), 10000);
+        }, i * 25);
+    }
     
-    // Создаем аудио элемент
+    for(let i = 0; i < 200; i++) {
+        setTimeout(() => {
+            const conf = document.createElement('div');
+            conf.className = 'confetti';
+            conf.style.left = Math.random() * 100 + '%';
+            conf.style.top = '-30px';
+            conf.style.background = `hsl(${Math.random() * 360}, 100%, 65%)`;
+            conf.style.width = (Math.random() * 12 + 6) + 'px';
+            conf.style.height = (Math.random() * 12 + 6) + 'px';
+            conf.style.animationDuration = (Math.random() * 4 + 2) + 's';
+            birthdayPage.appendChild(conf);
+            setTimeout(() => conf.remove(), 6000);
+        }, i * 18);
+    }
+    
+    const card = document.createElement('div');
+    card.className = 'birthday-card';
+    card.style.padding = '25px 35px';
+    card.style.width = '450px';
+    card.style.maxWidth = '85%';
+    card.innerHTML = `
+        <div style="font-size:50px;margin-bottom:10px;">🎉✅🎂🔧</div>
+        <h1 style="font-size:28px;margin-bottom:10px;background:linear-gradient(135deg,#00aa66,#ff66cc);-webkit-background-clip:text;background-clip:text;color:transparent;">САЙТ ВОССТАНОВЛЕН!</h1>
+        <p style="font-size:14px;margin-bottom:15px;color:#ff6699;"><strong>УРА!<br>🎁У ТЕБЯ БУДЕТ ПОДАРОК!</strong>🎁</p>
+        <div style="background:#ffecb3;border-radius:20px;padding:12px;margin:15px 0;"><p style="font-size:13px;color:#aa66cc;margin:0;">📍 <strong>КООРДИНАТЫ ПОДАРКА:</strong><br>🔥 <em>Место .........</em> 🔥</p></div>
+        <button class="ura-btn" id="restartGameBtn" style="padding:10px 30px;font-size:18px;background:linear-gradient(135deg,#00aa66,#44ffaa);">🎈 С ДНЕМ РОЖДЕНИЯ! 🎈</button>
+    `;
+    birthdayPage.appendChild(card);
+    
+    // Аудио-плеер
     const audio = document.createElement('audio');
     audio.id = 'birthdaySong';
-    audio.loop = true; // зацикливаем песню
-    audio.volume = 0.5; // громкость 50%
+    audio.loop = true;
+    audio.volume = 0.5;
+    audio.src = 'music2.mp3';
     
-    // Указываем путь к песне (замени на свой файл)
-    audio.src = 'music2.mp3'; // 👈 ПУТЬ К ВАШЕЙ ПЕСНЕ
-    
-    // Пытаемся автоматически воспроизвести
     const playPromise = audio.play();
-    
     if (playPromise !== undefined) {
-        playPromise.then(() => {
-            console.log('🎵 Песня играет!');
-        }).catch(error => {
+        playPromise.catch(error => {
             console.log('Автовоспроизведение заблокировано:', error);
-            // Показываем кнопку для ручного запуска
             showMusicPlayButton();
         });
     }
     
-    
-    
-    birthdayPage.appendChild(audio);
-    birthdayPage.appendChild(audioContainer);
-    
-    // Функция для показа кнопки ручного запуска (если автовоспроизведение заблокировано)
     function showMusicPlayButton() {
         const playButton = document.createElement('div');
         playButton.style.cssText = `
@@ -1521,27 +1692,21 @@ else if (q.type === "audio") {
         playButton.onclick = () => {
             audio.play();
             playButton.remove();
-            const container = document.querySelector('.music-control');
-            if (container) container.style.display = 'flex';
         };
         birthdayPage.appendChild(playButton);
         
-        // Удаляем кнопку через 10 секунд, если не нажали
         setTimeout(() => {
-            if (playButton.parentNode) {
-                playButton.remove();
-            }
+            if (playButton.parentNode) playButton.remove();
         }, 10000);
     }
     
-           
-        }
-        
-
+    birthdayPage.appendChild(audio);
+}
 
 
 // Периодически добавляем новые шарики и конфетти
-setInterval(() => {
+// Периодически добавляем новые шарики и конфетти
+globalCelebrationInterval = setInterval(() => {
     const birthdayPage = document.getElementById('birthdayPage');
     if (birthdayPage && birthdayPage.style.display !== 'none' && birthdayPage.style.opacity !== '0') {
         // Добавляем 1-2 новых шарика каждые 3 секунды
@@ -1580,7 +1745,6 @@ setInterval(() => {
         }
     }
 }, 3000);
-        
         
 
  // ========== НОВАЯ ЛОГИКА С ВИРУСНЫМИ КАРТИНКАМИ ==========
@@ -1749,11 +1913,11 @@ function stopImageSpam() {
 // ========== МАССИВ ТЕКСТОВ ДЛЯ КНОПКИ ==========
 const BUTTON_TEXTS = [
     "🎈 Получить подарок! 🎈",           // 0 нажатий (исходный)
-    "🤔 Ой, попробуй еще раз...",         // 1 нажатие
-    "😅 Не то... Ещё разок!",            // 2 нажатия
-    "🎁 Ну же, нажми ещё!",              // 3 нажатия
-    "💪 Ещё раз!",                      // 4 нажатия
-    "🔥 Сейчас получится 🔥"               // 5 нажатий
+    "Ой, попробуй еще раз",         // 1 нажатие
+    "Не то... Ещё раз!",            // 2 нажатия
+    "Ну же, нажми ещё!",              // 3 нажатия
+    "Ещё раз!",                      // 4 нажатия
+    "Сейчас получится"               // 5 нажатий
 ];
 
 // ========== ОБРАБОТЧИК КНОПКИ ==========
@@ -1784,12 +1948,6 @@ document.getElementById('uraBtn').onclick = async () => {
         btn.style.transform = 'scale(0.95)';
         setTimeout(() => { btn.style.transform = 'scale(1)'; }, 150);
         
-        // Добавляем эффект "тряски" для последнего шанса
-        if (clickCount === 5) {
-            btn.style.animation = 'shake 0.3s ease-in-out';
-            setTimeout(() => { btn.style.animation = ''; }, 300);
-        }
-        
         // Создаем вирусную картинку
         createVirusImage(false);
         
@@ -1803,7 +1961,7 @@ document.getElementById('uraBtn').onclick = async () => {
     
     // Блокируем кнопку и меняем текст на первый (о начале атаки)
     btn.disabled = true;
-    btn.textContent = '⚠️ ОБНАРУЖЕН ВИРУС! ⚠️';
+    btn.textContent = '⚠️ОБНАРУЖЕН ВИРУС!⚠️';
     btn.style.background = 'linear-gradient(135deg, #ff4444, #cc0000)';
     btn.style.opacity = '0.9';
     btn.style.cursor = 'wait';
@@ -1828,7 +1986,7 @@ document.getElementById('uraBtn').onclick = async () => {
             // ========== ЭКРАН ВЗЛОМА ==========
             const brokenDiv = document.createElement('div');
             brokenDiv.className = 'broken-effect';
-            brokenDiv.innerHTML = `<div class="broken-text">⚠️SYSTEM CRASH⚠️<br>ERROR 0xFFFFFFFF<br><span style="font-size:24px;">ТЫ СЛОМАЛ САЙТ...</span><br><span style="font-size:18px;color:#ff6666;">Восстановление требует авторизации</span></div>`;
+            brokenDiv.innerHTML = `<div class="broken-text">⚠️SYSTEM CRASH⚠️<br>ERROR 0xFFFFFFFF<br><span style="font-size:24px;">ТЫ СЛОМАЛ САЙТ...</span><br><span style="font-size:18px;color:#ff6666;">УСТАНОВЛЕН ЗАПРЕТ</span></div>`;
             document.body.appendChild(brokenDiv);
             
             if('vibrate' in navigator) navigator.vibrate([200, 100, 200, 100, 300]);
@@ -1878,11 +2036,11 @@ document.getElementById('uraBtn').onclick = async () => {
                 <div class="warning-text">
                     🔴 <strong>ВСЕ ДАННЫЕ ЗАШИФРОВАНЫ</strong> 🔴<br><br>
                     <strong style="color:#ff8888;">НЕОБХОДИМ ДОСТУП</strong><br><br>
-                    <small>🔐 Вирус "SHIZA_KARISHKA" заблокировал доступ к информации о подарке</small>
+                    <small>🔐 Вирус "SHIZA_KARISHKA" заблокировал доступ к информации о подарке</small><br><br>
                     <small>🛡️ Единственный способ восстановить доступ — пройти КВЕСТ<br><br><br></small>
                     <small style="color:#ff0000; font-weight: bold;">⚠️ НЕВЕРНЫЕ ОТВЕТЫ ПРИВЕДУТ К КРИТИЧЕСКОМУ СБОЮ ⚠️</small>
                 </div>
-                <button class="proceed-btn" id="proceedBtn">⟳ ПРОЙТИ КВЕСТ ⟳</button>
+                <button class="proceed-btn" id="proceedBtn">ПРОЙТИ КВЕСТ</button>
             `;
             hackDiv.appendChild(warningBox);
             document.body.appendChild(hackDiv);
@@ -1899,7 +2057,7 @@ document.getElementById('uraBtn').onclick = async () => {
             
         }, 8000); 
         
-    }, 2000); // 👈 ЗДЕСЬ ЗАДЕРЖКА 2 СЕКУНДЫ ПЕРЕД ДОЖДЕМ
+    }, 2000); 
     
     return;
 }
@@ -1957,7 +2115,7 @@ function createOneBalloon() {
     balloon.textContent = emojis[Math.floor(Math.random() * emojis.length)];
     balloon.style.left = Math.random() * 100 + '%';
     balloon.style.bottom = '-80px';
-    const size = Math.random() * 60 + 40;
+    const size = Math.random() * 35 + 25;
     balloon.style.fontSize = size + 'px';
     const duration = Math.random() * 8 + 6;
     balloon.style.animation = `floatUpFromBottom ${duration}s linear forwards`;
