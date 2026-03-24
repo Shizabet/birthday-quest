@@ -2838,7 +2838,6 @@ body.virus-infected {
     border-radius: 12px;
     background: #000;
     margin: 10px auto;
-    transform: scaleX(-1); /* Зеркальное отображение */
 }
 
 .ai-canvas {
