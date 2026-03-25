@@ -9,15 +9,15 @@
                 errorMeme: "❌ НЕВЕРНО! Ты точно помнишь?",
                 successMsg: "✅ ВЕРНО! Общага на стачек рулит!"
             },
-*/
+
 
 {
     type: "ai_vision",
-    text: "📸 AI_SCANNER: Нужен телефон, чтобы перенести вирус",
+    text: "📸 AI_SCANNER: Нужен любой телефон, чтобы перенести вирус",
     hint: "Наведи камеру на телефон, на который отправится вирус",
     errorMeme: "❌ ТЕЛЕФОН НЕ РАСПОЗНАН! Попробуй ещё раз!",
     successMsg: "✅ ТЕЛЕФОН РАСПОЗНАН! ДОСТУП РАЗРЕШЁН!"
-}
+}*/
 /*
             {
                 type: "qr",
@@ -584,7 +584,7 @@ function stopHackerBackground() {
                 const codeElement = document.getElementById('initCode');
                 
                 const statusMessages = ['[ ИНИЦИАЛИЗАЯ ДАННЫХ ]', '[ ЗАГРУЗКА МОДУЛЯ ]', '[ АВТОРИЗАЦИЯ ]', '[ БАЗА ВЗЛОМАНА ]', '[ АКТИВАЦИЯ СИСТЕМЫ ]', '[ ПОДГОТОВКА К КВЕСТУ ]', '[ ПОДКЛЮЧЕНИЕ К БАЗЕ ]', '[ РАСШИФРОВКА IP-АДРЕСА ]', '[ ЗАГРУЗКА ЗАВЕРШЕНА ]'];
-                const codeMessages = ['> ИНИЦИАЛИЗАЯ... [OK]', '> ЗАГРУЗКА МОДУЛЯ... [OK]', '> АВТОРИЗАЦИЯ... [OK]', '> БАЗА ВЗЛОМАНА... [OK]', '> АКТИВАЦИЯ... [OK]', '> ПОДГОТОВКА... [OK]', '> ПОДКЛЮЧЕНИЕ... [OK]', '> РАСШИФРОВКА IP-АДРЕСА... [OK]', '> ЗАГРУЗКА ЗАВЕРШЕНА'];
+                const codeMessages = ['> ИНИЦИАЛИЗАЯ... [OK]', '> ЗАГРУЗКА МОДУЛЯ... [OK]', '> АВТОРИЗАЦИЯ... [OK]', '> БАЗА ВЗЛОМАНА... [OK]', '> АКТИВАЦИЯ... [OK]', '> ПОДГОТОВКА... [OK]', '> ПОДКЛЮЧЕНИЕ... [OK]', '> РАСШИФРОВКА... [OK]', '> ЗАГРУЗКА ЗАВЕРШЕНА'];
                 
                 let progress = 0;
                 const progressInterval = setInterval(() => {
@@ -1701,6 +1701,36 @@ async function showFinalCelebration() {
         gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.5);
         oscillator.stop(audioCtx.currentTime + 0.5);
     } catch(e) {}
+
+    // В showFinalCelebration, после успешной капчи:
+try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    // Победная мелодия из двух нот
+    oscillator.frequency.value = 880;
+    gainNode.gain.value = 0.2;
+    oscillator.start();
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.2);
+    oscillator.stop(audioCtx.currentTime + 0.2);
+    
+    setTimeout(() => {
+        try {
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.frequency.value = 1046.5; // Нота До
+            gain2.gain.value = 0.2;
+            osc2.connect(gain2);
+            gain2.connect(audioCtx.destination);
+            osc2.start();
+            gain2.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
+            osc2.stop(audioCtx.currentTime + 0.3);
+        } catch(e) {}
+    }, 200);
+} catch(e) {}
     
     // Вибрация
     if (navigator.vibrate) navigator.vibrate(100);
@@ -1862,7 +1892,7 @@ async function showFinalCelebration() {
         <h1 style="font-size:28px;margin-bottom:10px;background:linear-gradient(135deg,#00aa66,#ff66cc);-webkit-background-clip:text;background-clip:text;color:transparent;">САЙТ ВОССТАНОВЛЕН!</h1>
         <p style="font-size:14px;margin-bottom:15px;color:#ff6699;"><strong>УРА!<br>🎁У ТЕБЯ БУДЕТ ПОДАРОК!</strong>🎁</p>
         <div style="background:#ffecb3;border-radius:20px;padding:12px;margin:15px 0;"><p style="font-size:13px;color:#aa66cc;margin:0;">📍 <strong>КООРДИНАТЫ ПОДАРКА:</strong><br>🔥 <em>Место .........</em> 🔥</p></div>
-        <button class="ura-btn" id="restartGameBtn" style="padding:10px 30px;font-size:18px;background:linear-gradient(135deg,#00aa66,#44ffaa);">🎈С ДНЕМ РОЖДЕНИЯ!🎈</button>
+        <button class="ura-btn" id="restartGameBtn" style="padding:10px 30px;font-size:18px;background:linear-gradient(135deg,#00aa66,#44ffaa);">🎈 С ДНЕМ РОЖДЕНИЯ! 🎈</button>
     `;
     birthdayPage.appendChild(card);
     
@@ -2085,12 +2115,229 @@ function createVirusImage(isSpam = false) {
     
     document.body.appendChild(img);
     
+if (isSpam) {
+        playVirusSound(); // Воспроизводим звук
+    }
+
     // Удаляем картинку через время
     if (!isSpam) {
         setTimeout(() => {
             if (img && img.remove) img.remove();
         }, 4000);
     }
+}
+
+// Один общий AudioContext для всех звуков
+let globalAudioCtx = null;
+
+// Функция инициализации аудио (вызывается один раз)
+function initAudio() {
+    if (!globalAudioCtx) {
+        try {
+            globalAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            // Включаем аудио контекст (нужно для некоторых браузеров)
+            if (globalAudioCtx.state === 'suspended') {
+                globalAudioCtx.resume();
+            }
+        } catch(e) {
+            console.log('Audio not supported');
+        }
+    }
+    return globalAudioCtx;
+}
+
+// Функция для воспроизведения звука (БЕЗ ЗАДЕРЖКИ)
+function playVirusSound() {
+    const audioCtx = initAudio();
+    if (!audioCtx) return;
+    
+    try {
+        // Воспроизводим три писка с минимальными задержками
+        for(let i = 0; i < 3; i++) {
+            // Используем текущее время аудио контекста
+            const startTime = audioCtx.currentTime + (i * 0.08); // 80мс между писками
+            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.type = 'square';
+            osc.frequency.value = 800 + (i * 200);
+            gain.gain.value = 0.1;
+            
+            osc.start(startTime);
+            gain.gain.exponentialRampToValueAtTime(0.00001, startTime + 0.15);
+            osc.stop(startTime + 0.15);
+        }
+    } catch(e) {
+        console.log('Play sound error:', e);
+    }
+}
+
+// Функция создания одной вирусной картинки
+function createVirusImage(isSpam = false) {
+    const img = document.createElement('img');
+    const randomImage = VIRUS_IMAGES[Math.floor(Math.random() * VIRUS_IMAGES.length)];
+    img.src = randomImage;
+    img.className = 'virus-popup';
+    
+    const isMobile = isMobileDevice();
+    
+    let size;
+    if (isSpam) {
+        if (isMobile) {
+            size = Math.random() * 100 + 80;
+        } else {
+            size = Math.random() * 200 + 180;
+        }
+    } else {
+        if (isMobile) {
+            size = Math.random() * 100 + 80;
+        } else {
+            size = Math.random() * 80 + 70;
+        }
+    }
+    
+    const maxSize = Math.min(window.innerWidth, window.innerHeight) * 0.7;
+    size = Math.min(size, maxSize);
+    
+    function isPositionBlocked(x, y, width, height) {
+        const elementsToAvoid = [
+            '.birthday-card',
+            '.birthday-card button',
+            '.birthday-card h1',
+            '.birthday-card h2',
+            '.birthday-card p'
+        ];
+        
+        for (let selector of elementsToAvoid) {
+            const element = document.querySelector(selector);
+            if (element) {
+                const rect = element.getBoundingClientRect();
+                const padding = 20;
+                
+                if (x + width > rect.left - padding &&
+                    x < rect.right + padding &&
+                    y + height > rect.top - padding &&
+                    y < rect.bottom + padding) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 30;
+    
+    if (!isSpam) {
+        do {
+            x = Math.random() * (window.innerWidth - size);
+            y = Math.random() * (window.innerHeight - size);
+            attempts++;
+            
+            if (!isPositionBlocked(x, y, size, size)) {
+                break;
+            }
+            
+            if (attempts > maxAttempts) {
+                const corners = [
+                    [10, 10],
+                    [window.innerWidth - size - 10, 10],
+                    [10, window.innerHeight - size - 10],
+                    [window.innerWidth - size - 10, window.innerHeight - size - 10]
+                ];
+                const randomCorner = corners[Math.floor(Math.random() * corners.length)];
+                x = randomCorner[0];
+                y = randomCorner[1];
+                break;
+            }
+        } while (true);
+    } else {
+        x = Math.random() * (window.innerWidth - size);
+        y = Math.random() * (window.innerHeight - size);
+    }
+    
+    img.style.left = `${Math.max(0, Math.min(x, window.innerWidth - size))}px`;
+    img.style.top = `${Math.max(0, Math.min(y, window.innerHeight - size))}px`;
+    img.style.width = `${size}px`;
+    img.style.height = `${size}px`;
+    
+    const tilt = (Math.random() - 0.5) * 15;
+    img.style.transform = `rotate(${tilt}deg)`;
+    
+    document.body.appendChild(img);
+    
+    // 🔥 ВОСПРОИЗВОДИМ ЗВУК БЕЗ ЗАДЕРЖКИ
+    if (isSpam) {
+        playVirusSound();
+    }
+    
+    if (!isSpam) {
+        setTimeout(() => {
+            if (img && img.remove) img.remove();
+        }, 4000);
+    }
+}
+
+// Функция спама картинками
+function startImageSpamWithSound() {
+    if (spamInterval) return;
+    
+    // Активируем аудио при первом спаме
+    initAudio();
+    
+    // Удаляем старые картинки
+    const oldImages = document.querySelectorAll('.virus-popup');
+    oldImages.forEach(img => img.remove());
+    
+    spamInterval = setInterval(() => {
+        createVirusImage(true);
+        
+        if (navigator.vibrate) navigator.vibrate(30);
+    }, 80);
+}
+
+// Инициализация аудио при первом взаимодействии пользователя
+function initAudioOnFirstClick() {
+    const btn = document.getElementById('uraBtn');
+    if (btn) {
+        const originalClick = btn.onclick;
+        btn.onclick = async (e) => {
+            // Активируем аудио при первом клике
+            initAudio();
+            // Вызываем оригинальный обработчик
+            if (originalClick) {
+                await originalClick(e);
+            }
+        };
+    }
+}
+
+// Вызываем при загрузке страницы
+initAudioOnFirstClick();
+
+// Функция спама картинками СО ЗВУКОМ
+function startImageSpamWithSound() {
+    if (spamInterval) return;
+    
+    // Удаляем старые картинки
+    const oldImages = document.querySelectorAll('.virus-popup');
+    oldImages.forEach(img => img.remove());
+    
+    // 🔥 СОЗДАЕМ ПО ОДНОЙ КАРТИНКЕ КАЖДЫЙ ИНТЕРВАЛ СО ЗВУКОМ
+    spamInterval = setInterval(() => {
+        // Создаем картинку
+        createVirusImage(true);
+        // Воспроизводим звук
+        playVirusSound();
+        
+        // Небольшая вибрация для эффекта
+        if (navigator.vibrate) navigator.vibrate(30);
+    }, 80);
 }
 
 // Функция спама картинками
@@ -2129,10 +2376,45 @@ const BUTTON_TEXTS = [
     "🎈 Получить подарок! 🎈",           // 0 нажатий (исходный)
     "Ой, попробуй еще раз",         // 1 нажатие
     "Не то... Ещё раз!",            // 2 нажатия
-    "Ну же, нажми ещё!",              // 3 нажатия
-    "Ещё раз!",                      // 4 нажатия
-    "Сейчас получится"               // 5 нажатий
+    //"Ну же, нажми ещё!",              // 3 нажатия
+    //"Ещё раз!",                      // 4 нажатия
+    //"Сейчас получится"               // 5 нажатий
 ];
+
+
+
+let sirenAudio = null;
+
+function playSirenSound() {
+    stopSirenSound();
+    
+    try {
+        sirenAudio = new Audio('indoor-fire-alarm.mp3'); // Вставьте вашу ссылку
+        sirenAudio.volume = 0.6; // Громкость (0.0 - 1.0)
+        sirenAudio.loop = true; // Зацикливание (если нужно)
+        
+        sirenAudio.play().catch(e => {
+            console.log('Автовоспроизведение заблокировано:', e);
+        });
+        
+        // Автоматическая остановка через 2.5 секунды
+        setTimeout(() => {
+            stopSirenSound();
+        }, 3000);
+        
+    } catch(e) {
+        console.log('Sound error:', e);
+    }
+}
+
+function stopSirenSound() {
+    if (sirenAudio) {
+        sirenAudio.pause();
+        sirenAudio.currentTime = 0;
+        sirenAudio = null;
+    }
+}
+
 
 // ========== ОБРАБОТЧИК КНОПКИ ==========
 document.getElementById('uraBtn').onclick = async () => {
@@ -2141,7 +2423,7 @@ document.getElementById('uraBtn').onclick = async () => {
     const birthdayPage = document.getElementById('birthdayPage');
     
     // 🔥 ПЕРВЫЕ 5 НАЖАТИЙ - МЕНЯЕМ ТЕКСТ И ПОКАЗЫВАЕМ КАРТИНКИ
-    if (clickCount <= 5) {
+    if (clickCount <= 2) {
         // Меняем текст кнопки (если есть текст для этого нажатия)
         if (clickCount <= BUTTON_TEXTS.length - 1) {
             btn.textContent = BUTTON_TEXTS[clickCount];
@@ -2152,9 +2434,9 @@ document.getElementById('uraBtn').onclick = async () => {
             '#667eea',  // исходный
             '#ff6b6b',  // 1 нажатие
             '#ff8c42',  // 2 нажатие
-            '#ffd966',  // 3 нажатие
-            '#6c5ce7',  // 4 нажатие
-            '#ff4444'   // 5 нажатие
+            //'#ffd966',  // 3 нажатие
+            //'#6c5ce7',  // 4 нажатие
+            //'#ff4444'   // 5 нажатие
         ];
         btn.style.background = `linear-gradient(135deg, ${colors[clickCount]}, #764ba2)`;
         
@@ -2169,7 +2451,7 @@ document.getElementById('uraBtn').onclick = async () => {
     }
     
     // 🔥 6-е НАЖАТИЕ - ЗАПУСКАЕМ ДОЖДЬ
-   if (clickCount === 6) {
+   if (clickCount === 3) {
     const btn = document.getElementById('uraBtn');
     const birthdayPage = document.getElementById('birthdayPage');
     
@@ -2190,7 +2472,7 @@ document.getElementById('uraBtn').onclick = async () => {
         btn.style.animation = '';
         
         // 🔥 ЗАПУСКАЕМ ДОЖДЬ ИЗ КАРТИНОК
-        startImageSpam();
+        startImageSpamWithSound();
         
         // Через 5 секунд показываем экран взлома
         setTimeout(async () => {
@@ -2202,9 +2484,11 @@ document.getElementById('uraBtn').onclick = async () => {
             brokenDiv.className = 'broken-effect';
             brokenDiv.innerHTML = `<div class="broken-text">⚠️SYSTEM CRASH⚠️<br>ERROR 0xFFFFFFFF<br><span style="font-size:24px;">ТЫ СЛОМАЛ САЙТ...</span><br><span style="font-size:18px;color:#ff6666;">УСТАНОВЛЕН ЗАПРЕТ</span></div>`;
             document.body.appendChild(brokenDiv);
+
+            playSirenSound();
             
             if('vibrate' in navigator) navigator.vibrate([300, 100, 300, 100, 500, 200, 300]);
-            await new Promise(resolve => setTimeout(resolve, 2500));
+            await new Promise(resolve => setTimeout(resolve, 3000));
             brokenDiv.remove();
             
             const hackDiv = document.createElement('div');
