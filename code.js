@@ -2881,9 +2881,6 @@ async function renderShakeTask(q) {
                     0 0 0 0
                 </div>
                 <div class="shake-info">
-                    <div class="shake-counter">
-                        ТРЯСОК: <span id="shakeCount">0/5</span>
-                    </div>
                     <div class="shake-progress-container">
                         <div class="shake-progress-bar" id="shakeProgress">0%</div>
                     </div>
