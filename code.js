@@ -18,6 +18,16 @@
     errorMeme: "❌ ТЕЛЕФОН НЕ РАСПОЗНАН! Попробуй ещё раз!",
     successMsg: "✅ ТЕЛЕФОН РАСПОЗНАН! ДОСТУП РАЗРЕШЁН!"
 }*/
+
+{
+    type: "shake",
+    text: "📱 SHAKE_DETECTOR: Вирус заблокировал доступ к файлу. Нужно потрясти телефон, чтобы восстановить код доступа!",
+    hint: "🔥 ПОТРЯСИ ТЕЛЕФОН, ЧТОБЫ АКТИВИРОВАТЬ ДЕКОДЕР!",
+    errorMeme: "❌ КОД НЕ СОШЕЛСЯ! Попробуй еще раз потрясти телефон!",
+    successMsg: "✅ КОД ВОССТАНОВЛЕН! ДОСТУП РАЗРЕШЁН!",
+    targetCode: [2, 0, 0, 3],
+    shakeCount: 5
+}
 /*
             {
                 type: "qr",
@@ -216,6 +226,23 @@
 
         let globalCelebrationInterval = null;
         
+// Запрос разрешения на датчики движения для iOS
+async function requestMotionPermission() {
+    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+        try {
+            const permission = await DeviceMotionEvent.requestPermission();
+            if (permission === 'granted') {
+                console.log('Motion permission granted');
+            }
+        } catch (e) {
+            console.log('Motion permission denied:', e);
+        }
+    }
+}
+
+// Вызываем при старте квеста
+// Можно добавить в startQuest() после инициализации
+
         function generateCaptchaQuestion() {
             const questions = [
                 { text: "Твой год рождения?", answer: "2003" }
@@ -992,6 +1019,9 @@ function removeHackerTopPanel() {
         // ОТРИСОВКА ТЕКУЩЕГО ВОПРОСА
         async function renderCurrent() {
 
+stopShakeDetection();
+    isShakeTaskActive = false;
+
             if (window.aiCameraCleanup) {
         window.aiCameraCleanup();
         window.aiCameraCleanup = null;
@@ -1020,9 +1050,24 @@ function removeHackerTopPanel() {
             
             let html = `<div class="progress-bar-container"><div class="progress-fill" style="width: ${progressPercent}%;"></div></div>`;
             html += `<div class="question-box"><div id="questionText" class="question-text"></div>`;
-            
+             if (q.type === "shake") {
+        html += `</div>`; // закрываем question-box
+        appDiv.innerHTML = html;
+        
+        // Анимация печатания вопроса
+        const questionElement = document.getElementById('questionText');
+        await typeText(questionElement, `> ${q.text}`, 25);
+        
+        const cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        questionElement.appendChild(cursor);
+        
+        // Рендерим задание с тряской
+        await renderShakeTask(q);
+        return;
+    }
             // Медиа контент для media типа
-            if (q.type === "media") {
+            else if (q.type === "media") {
                 html += `<div class="media-container" id="mediaContainer">`;
                 if (q.mediaType === "image") {
                     html += `<img src="${q.mediaUrl}" alt="memory" id="mediaElement" style="max-width:100%; max-height:200px; border-radius:8px;">`;
@@ -1037,17 +1082,7 @@ function removeHackerTopPanel() {
                 // Добавляем блок с ответами ДЛЯ media типа
                 html += `<div class="answers" id="answersContainer"></div>`;
             }
-            // SQL Injection
-            else if (q.type === "sql") {
-                html += `<div class="sql-container">
-                            <div class="sql-query">${q.sqlTemplate}<span class="sql-input-span" id="sqlPreview">________</span>${q.sqlSuffix}</div>
-                            <div class="input-group">
-                                <input type="text" id="sqlInput" class="terminal-input" placeholder="ВСТАВЬ СВОЙ КОД..." autocomplete="off">
-                                <button id="sqlSubmitBtn" class="submit-btn">[ EXECUTE ]</button>
-                            </div>
-                            <div class="hint-text">💡 ${q.hint}</div>
-                         </div>`;
-            }
+
 
             // Аудио вопрос (с плеером)
 // Аудио вопрос (с плеером)
@@ -1536,6 +1571,7 @@ else if (q.type === "audio") {
                 if (inputField) inputField.onkeypress = (e) => { if(e.key === 'Enter') handleInputAnswer(inputField.value.trim().toLowerCase(), q); };
             }
         }
+        
         
         async function startQuest() {
     // Сначала показываем контейнер (но он невидим)
@@ -2802,3 +2838,276 @@ birthdayPage.classList.add = function(className) {
     }
     return originalFadeOut.call(birthdayPage.classList, className);
 };
+
+// ========== ФУНКЦИИ ДЛЯ ЗАДАНИЯ С ТРЯСКОЙ ==========
+let shakeListener = null;
+let shakeCount = 0;
+let currentCode = [0, 0, 0, 0];
+let isShakeTaskActive = false;
+let lastShakeTime = 0;
+
+// Функция для генерации случайного числа
+function getRandomDigit() {
+    return Math.floor(Math.random() * 10);
+}
+
+// Функция обновления отображения кода
+function updateCodeDisplay() {
+    const codeDisplay = document.getElementById('shakeCodeDisplay');
+    if (codeDisplay) {
+        codeDisplay.innerHTML = currentCode.join(' ');
+        codeDisplay.style.animation = 'codePulse 0.3s ease';
+        setTimeout(() => {
+            if (codeDisplay) codeDisplay.style.animation = '';
+        }, 300);
+    }
+}
+
+// Функция обработки тряски
+function handleShake() {
+    if (!isShakeTaskActive) return;
+    
+    const now = Date.now();
+    if (now - lastShakeTime < 500) return;
+    lastShakeTime = now;
+    
+    shakeCount++;
+    
+    if (navigator.vibrate) navigator.vibrate(100);
+    playShakeSound();
+    
+    if (shakeCount < 5) {
+        const randomPos = Math.floor(Math.random() * 4);
+        currentCode[randomPos] = getRandomDigit();
+        updateCodeDisplay();
+        showShakeProgress();
+        
+        const container = document.querySelector('.shake-container');
+        if (container) {
+            container.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                if (container) container.style.transform = 'scale(1)';
+            }, 150);
+        }
+        
+    } else if (shakeCount === 5) {
+        currentCode = [2, 0, 0, 3];
+        updateCodeDisplay();
+        
+        const statusDiv = document.getElementById('shakeStatus');
+        if (statusDiv) {
+            statusDiv.innerHTML = '✅ КОД ВОССТАНОВЛЕН! ДОСТУП РАЗРЕШЁН!';
+            statusDiv.style.color = '#2eff7a';
+        }
+        
+        isShakeTaskActive = false;
+        
+        setTimeout(() => {
+            showMessage(questions[currentIndex].successMsg);
+            currentIndex++;
+            renderCurrent();
+        }, 1500);
+    }
+}
+
+// Функция отображения прогресса
+function showShakeProgress() {
+    const progressDiv = document.getElementById('shakeProgress');
+    if (progressDiv) {
+        const percent = (shakeCount / 5) * 100;
+        progressDiv.style.width = `${percent}%`;
+        progressDiv.textContent = `${Math.floor(percent)}%`;
+    }
+    const countDiv = document.getElementById('shakeCount');
+    if (countDiv) {
+        countDiv.textContent = `${shakeCount}/5`;
+    }
+}
+
+// Звук тряски
+function playShakeSound() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'square';
+        osc.frequency.value = 600;
+        gain.gain.value = 0.1;
+        osc.start();
+        gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.08);
+        osc.stop(audioCtx.currentTime + 0.08);
+    } catch(e) {}
+}
+
+// Запуск детектора тряски
+function startShakeDetection() {
+    if (shakeListener) return;
+    
+    let lastX = null, lastY = null, lastZ = null;
+    const SHAKE_THRESHOLD = 15;
+    
+    shakeListener = (event) => {
+        if (!isShakeTaskActive) return;
+        
+        const acceleration = event.accelerationIncludingGravity;
+        if (!acceleration) return;
+        
+        const x = acceleration.x;
+        const y = acceleration.y;
+        const z = acceleration.z;
+        
+        if (lastX !== null) {
+            const deltaX = Math.abs(x - lastX);
+            const deltaY = Math.abs(y - lastY);
+            const deltaZ = Math.abs(z - lastZ);
+            const delta = deltaX + deltaY + deltaZ;
+            
+            if (delta > SHAKE_THRESHOLD) {
+                handleShake();
+            }
+        }
+        
+        lastX = x;
+        lastY = y;
+        lastZ = z;
+    };
+    
+    window.addEventListener('devicemotion', shakeListener);
+    
+    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+        DeviceMotionEvent.requestPermission().catch(console.log);
+    }
+}
+
+// Остановка детектора тряски
+function stopShakeDetection() {
+    if (shakeListener) {
+        window.removeEventListener('devicemotion', shakeListener);
+        shakeListener = null;
+    }
+}
+
+// Функция рендеринга задания с тряской
+async function renderShakeTask(q) {
+    isShakeTaskActive = true;
+    shakeCount = 0;
+    currentCode = [0, 0, 0, 0];
+    
+    const html = `
+        <div class="shake-container">
+            <div class="shake-code-box">
+                <div class="shake-code-title">🔐 КОД ДОСТУПА 🔐</div>
+                <div class="shake-code-display" id="shakeCodeDisplay">
+                    0 0 0 0
+                </div>
+                <div class="shake-info">
+                    <div class="shake-counter">
+                        ТРЯСОК: <span id="shakeCount">0/5</span>
+                    </div>
+                    <div class="shake-progress-container">
+                        <div class="shake-progress-bar" id="shakeProgress">0%</div>
+                    </div>
+                </div>
+                <div class="shake-status" id="shakeStatus">
+                    ⚡ ПОТРЯСИ ТЕЛЕФОН, ЧТОБЫ АКТИВИРОВАТЬ ДЕКОДЕР ⚡
+                </div>
+                <div class="shake-hint">
+                    💡 ${q.hint}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    appDiv.innerHTML += html;
+    
+    startShakeDetection();
+    
+    // Добавляем стили если их нет
+    if (!document.querySelector('#shakeStyles')) {
+        const style = document.createElement('style');
+        style.id = 'shakeStyles';
+        style.textContent = `
+            @keyframes codePulse {
+                0% { transform: scale(1); text-shadow: 0 0 0 #2eff7a; }
+                50% { transform: scale(1.1); text-shadow: 0 0 20px #2eff7a; }
+                100% { transform: scale(1); text-shadow: 0 0 0 #2eff7a; }
+            }
+            .shake-container {
+                background: #0a0f0c;
+                border: 2px solid #ff3366;
+                border-radius: 16px;
+                padding: 20px;
+                margin: 15px 0;
+                text-align: center;
+                animation: borderPulse 1s infinite;
+            }
+            .shake-code-box {
+                background: #030605;
+                border-radius: 12px;
+                padding: 20px;
+            }
+            .shake-code-title {
+                color: #ff3366;
+                font-size: 14px;
+                margin-bottom: 15px;
+                letter-spacing: 2px;
+            }
+            .shake-code-display {
+                font-size: 48px;
+                font-weight: bold;
+                font-family: monospace;
+                color: #2eff7a;
+                background: #000;
+                padding: 20px;
+                border-radius: 12px;
+                letter-spacing: 20px;
+                margin-bottom: 20px;
+                text-shadow: 0 0 10px #2eff7a;
+            }
+            .shake-counter {
+                color: #88ffaa;
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            .shake-progress-container {
+                background: #1a1f1c;
+                border-radius: 30px;
+                height: 30px;
+                margin: 15px 0;
+                overflow: hidden;
+            }
+            .shake-progress-bar {
+                background: linear-gradient(90deg, #ff3366, #2eff7a);
+                width: 0%;
+                height: 100%;
+                line-height: 30px;
+                color: white;
+                font-size: 12px;
+                text-align: center;
+                transition: width 0.3s ease;
+            }
+            .shake-status {
+                color: #ffaa66;
+                font-size: 14px;
+                margin: 15px 0;
+                padding: 10px;
+                background: rgba(255, 51, 102, 0.1);
+                border-radius: 8px;
+            }
+            .shake-hint {
+                color: #88ffaa;
+                font-size: 12px;
+                margin-top: 15px;
+                padding-top: 10px;
+                border-top: 1px solid #ff3366;
+            }
+            @keyframes borderPulse {
+                0%, 100% { border-color: #ff3366; box-shadow: 0 0 10px rgba(255, 51, 102, 0.3); }
+                50% { border-color: #ff6699; box-shadow: 0 0 25px rgba(255, 51, 102, 0.8); }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
