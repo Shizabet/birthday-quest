@@ -338,7 +338,7 @@
             font-family: monospace;
         }
 
-        .init-progress-container {
+        .init-progress-contner {
             width: 100%;
             height: 30px;
             background: #1a1f1c;
@@ -402,7 +402,7 @@
             100% { transform: translate(0, 0); opacity: 0.3; }
         }
 
-        .quiz-container {
+        .quiz-contner {
             width: 100%;
             height: 100vh;
             display: flex;
@@ -617,7 +617,7 @@
             color: black;
         }
 
-        .progress-bar-container {
+        .progress-bar-contner {
             background: #1a1f1c;
             height: 4px;
             margin: 8px 0 15px 0;
@@ -632,7 +632,7 @@
             transition: width 0.3s ease;
         }
 
-        .media-container {
+        .media-contner {
             margin: 15px 0;
             text-align: center;
             background: #0a0f0c;
@@ -641,13 +641,13 @@
             border: 1px solid #2eff7a;
         }
 
-        .media-container img {
+        .media-contner img {
             max-width: 100%;
             max-height: 200px;
             border-radius: 8px;
         }
 
-        .media-container video {
+        .media-contner video {
             max-width: 100%;
             max-height: 200px;
             border-radius: 8px;
@@ -674,7 +674,7 @@
             overflow: hidden;
         }
 
-        .matrix-rain {
+        .matrix-rn {
             position: absolute;
             top: 0;
             left: 0;
@@ -723,7 +723,7 @@
             color: #000;
         }
 
-        .captcha-container {
+        .captcha-contner {
             position: fixed;
             top: 0;
             left: 0;
@@ -854,7 +854,7 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
 
-        .code-container, .sql-container, .hash-container, .binary-container, .regex-container {
+        .code-contner, .sql-contner, .hash-contner, .binary-contner, .regex-contner {
             background: #030605;
             padding: 15px;
             border-radius: 8px;
@@ -904,7 +904,7 @@
         }
 
         /* ---------- ПЛАВНОЕ ПОЯВЛЕНИЕ КВЕСТА ---------- */
-.quiz-container {
+.quiz-contner {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -2838,7 +2838,7 @@ body.virus-infected {
     border-radius: 12px;
     background: #000;
     margin: 10px auto;
-    transform: scaleX(-1); /* Зеркальное отображение */
+    /*transform: scaleX(-1);  Зеркальное отображение */
 }
 
 .ai-canvas {
