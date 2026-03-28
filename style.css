@@ -338,7 +338,7 @@
             font-family: monospace;
         }
 
-        .init-progress-contner {
+        .init-progress-container {
             width: 100%;
             height: 30px;
             background: #1a1f1c;
@@ -402,7 +402,7 @@
             100% { transform: translate(0, 0); opacity: 0.3; }
         }
 
-        .quiz-contner {
+        .quiz-container {
             width: 100%;
             height: 100vh;
             display: flex;
@@ -617,7 +617,7 @@
             color: black;
         }
 
-        .progress-bar-contner {
+        .progress-bar-container {
             background: #1a1f1c;
             height: 4px;
             margin: 8px 0 15px 0;
@@ -632,7 +632,7 @@
             transition: width 0.3s ease;
         }
 
-        .media-contner {
+        .media-container {
             margin: 15px 0;
             text-align: center;
             background: #0a0f0c;
@@ -641,13 +641,13 @@
             border: 1px solid #2eff7a;
         }
 
-        .media-contner img {
+        .media-container img {
             max-width: 100%;
             max-height: 200px;
             border-radius: 8px;
         }
 
-        .media-contner video {
+        .media-container video {
             max-width: 100%;
             max-height: 200px;
             border-radius: 8px;
@@ -674,7 +674,7 @@
             overflow: hidden;
         }
 
-        .matrix-rn {
+        .matrix-rain {
             position: absolute;
             top: 0;
             left: 0;
@@ -723,7 +723,7 @@
             color: #000;
         }
 
-        .captcha-contner {
+        .captcha-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -854,7 +854,7 @@
             100% { transform: translateY(100vh); opacity: 0; }
         }
 
-        .code-contner, .sql-contner, .hash-contner, .binary-contner, .regex-contner {
+        .code-container, .sql-container, .hash-container, .binary-container, .regex-container {
             background: #030605;
             padding: 15px;
             border-radius: 8px;
@@ -904,7 +904,7 @@
         }
 
         /* ---------- ПЛАВНОЕ ПОЯВЛЕНИЕ КВЕСТА ---------- */
-.quiz-contner {
+.quiz-container {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -1095,15 +1095,19 @@
 /* Эффект сканирования портов */
 .port-scan {
     position: absolute;
-    color: #ffaa66;
+    color: #ffaa66;                  /* ← оранжевый цвет */
     font-family: monospace;
-    font-size: 10px;
+    font-size: 11px;
     white-space: nowrap;
-    animation: portPulse 0.5s ease-in-out infinite;
+    animation: portPulse 0.5s ease-in-out infinite; /* ← пульсация */
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+    z-index: 100;
 }
 
 @keyframes portPulse {
-    0% { opacity: 0.3; text-shadow: 0 0 0px #ffaa66; }
+    0% { opacity: 0.4; text-shadow: 0 0 0px #ffaa66; }
     100% { opacity: 1; text-shadow: 0 0 5px #ffaa66; }
 }
 
@@ -2838,7 +2842,7 @@ body.virus-infected {
     border-radius: 12px;
     background: #000;
     margin: 10px auto;
-    /*transform: scaleX(-1);  Зеркальное отображение */
+    transform: scaleX(-1); /* Зеркальное отображение */
 }
 
 .ai-canvas {
@@ -2920,4 +2924,271 @@ body.virus-infected {
 
 @keyframes ai-spin {
     to { transform: rotate(360deg); }
+}
+
+
+/* Бегущие строки снизу */
+.hack-marquee {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    white-space: nowrap;
+    color: #ff3366;
+    font-family: monospace;
+    font-size: 11px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 4px 10px;
+    border-radius: 4px;
+    pointer-events: none;
+    text-shadow: 0 0 3px #ff3366;
+    z-index: 100;
+}
+
+@keyframes marqueeSlide {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+}
+
+/* Убедитесь, что строки взлома видны */
+.hack-line {
+    position: absolute;
+    color: #2eff7a;
+    font-family: monospace;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    animation: hackLineFloat linear forwards;
+    text-shadow: 0 0 3px #2eff7a;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border-left: 2px solid #ff3366;
+    z-index: 100;
+    pointer-events: none;
+}
+
+@keyframes hackLineFloat {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.9;
+    }
+    80% {
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateX(100vw);
+        opacity: 0;
+    }
+}
+
+/* Терминальные строки */
+.terminal-line {
+    position: absolute;
+    color: #88ffaa;
+    font-family: monospace;
+    font-size: 10px;
+    white-space: nowrap;
+    opacity: 0.4;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 2px 5px;
+    border-radius: 3px;
+    z-index: 100;
+}
+
+/* Сканирование портов */
+.port-scan {
+    position: absolute;
+    color: #ffaa66;
+    font-family: monospace;
+    font-size: 11px;
+    white-space: nowrap;
+    animation: portPulse 0.5s ease-in-out infinite;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 6px;
+    border-radius: 4px;
+    z-index: 100;
+}
+
+@keyframes portPulse {
+    0% { opacity: 0.4; text-shadow: 0 0 0px #ffaa66; }
+    100% { opacity: 1; text-shadow: 0 0 5px #ffaa66; }
+}
+
+
+
+/* ========== УМЕНЬШЕНИЕ ЭКРАНА КАМЕРЫ ДЛЯ МОБИЛЬНЫХ ========== */
+
+.ai-camera-container {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.ai-video {
+    width: 100%;
+    max-width: 280px !important;  /* Уменьшаем максимальную ширину */
+    height: auto;
+    max-height: 210px !important; /* Ограничиваем высоту */
+    margin: 10px auto;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.ai-preview {
+    margin: 10px 0;
+    padding: 8px;
+    min-height: auto;
+}
+
+.ai-detection-result {
+    font-size: 12px;
+    word-break: break-word;
+}
+
+.ai-capture-btn {
+    padding: 10px 20px !important;
+    font-size: 16px !important;
+    margin: 10px 5px !important;
+    width: auto;
+    min-width: 140px;
+}
+
+.ai-status {
+    font-size: 11px;
+    padding: 8px;
+}
+
+/* Специально для мобильных устройств */
+@media (max-width: 768px) {
+    .ai-video {
+        max-width: 240px !important;
+        max-height: 180px !important;
+    }
+    
+    .ai-capture-btn {
+        padding: 8px 16px !important;
+        font-size: 14px !important;
+        min-width: 120px;
+    }
+    
+    .ai-camera-container {
+        padding: 12px !important;
+    }
+    
+    .ai-detection-result {
+        font-size: 11px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .ai-video {
+        max-width: 200px !important;
+        max-height: 150px !important;
+    }
+    
+    .ai-capture-btn {
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+        min-width: 100px;
+    }
+}
+
+/* ========== ПЛАВНОЕ ПОЯВЛЕНИЕ ВАРИАНТОВ ОТВЕТОВ ========== */
+
+/* Анимация для кнопок ответов */
+.answer-btn {
+    animation: fadeInSlideLeft 0.3s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+    opacity: 0;
+    transform: translateX(-15px);
+}
+
+@keyframes fadeInSlideLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Разные задержки для каждой кнопки (создает эффект очереди) */
+.answer-btn:nth-child(1) { animation-delay: 0s; }
+.answer-btn:nth-child(2) { animation-delay: 0.05s; }
+.answer-btn:nth-child(3) { animation-delay: 0.1s; }
+.answer-btn:nth-child(4) { animation-delay: 0.15s; }
+.answer-btn:nth-child(5) { animation-delay: 0.2s; }
+.answer-btn:nth-child(6) { animation-delay: 0.25s; }
+
+/* Дополнительный эффект при наведении */
+.answer-btn {
+    transition: all 0.2s ease;
+}
+
+.answer-btn:hover {
+    transform: translateX(5px) scale(1.02);
+    background: #1c392a;
+    border-color: #55ff99;
+    box-shadow: 0 0 10px rgba(85, 255, 153, 0.3);
+}
+
+/* Анимация для появления всего блока с вариантами */
+.answers {
+    animation: fadeInUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Минималистичный аудио-плеер - только кнопка play и таймлайн */
+.audio-player::-webkit-media-controls-panel {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Скрываем всё, кроме кнопки play и таймлайна */
+.audio-player::-webkit-media-controls-mute-button,
+.audio-player::-webkit-media-controls-volume-slider,
+.audio-player::-webkit-media-controls-playback-rate-button,
+.audio-player::-webkit-media-controls-download-button,
+.audio-player::-webkit-media-controls-pip-button,
+.audio-player::-webkit-media-controls-fullscreen-button,
+.audio-player::-webkit-media-controls-current-time-display,
+.audio-player::-webkit-media-controls-time-remaining-display {
+    display: none !important;
+}
+
+/* Оставляем кнопку play */
+.audio-player::-webkit-media-controls-play-button {
+    display: block !important;
+}
+
+/* Оставляем таймлайн (ползунок времени) */
+.audio-player::-webkit-media-controls-timeline {
+    display: block !important;
+    margin: 0 10px;
 }
