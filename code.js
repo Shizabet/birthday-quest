@@ -1,214 +1,95 @@
+// ВОПРОСЫ КВЕСТА (активные вопросы)
+const questions = [
+    
+    {
+        type: "choice",
+        text: "СБОР ЛОГОВ: Нужны данные места возраждения вируса. Выбери правильный адрес возрождения вируса",
+        options: ["Караваевская 28к1", "Заневский проспект 42", "пл. Стачек 5", "Парголовсккая 32"],
+        correct: "пл. Стачек 5",
+        errorMeme: "❌ НЕВЕРНО! Ты точно помнишь?",
+        successMsg: "✅ ВЕРНО! Общага на стачек рулит!"
+    },
 
- // ВОПРОСЫ КВЕСТА
-        const questions = [
-         /*  {
-                type: "choice",
-                text: "СБОР ЛОГОВ: Нужны данные места обнаружения вируса. Выбери правильный адрес возраждения вируса",
-                options: ["Караваевская 28к1", "Заневский проспект 42", "пл. Стачек 5", "Парголовсккая 32"],
-                correct: "пл. Стачек 5",
-                errorMeme: "❌ НЕВЕРНО! Ты точно помнишь?",
-                successMsg: "✅ ВЕРНО! Общага на стачек рулит!"
-            },
-*/
+    {
+        type: "audio",
+        text: "🎵 MUSIC_QUIZ: Прослушай трек и напиши исполнителя",
+        audioUrl: "music.mp3",
+        audioCaption: "🎧 УГАДАЙ ИСПОЛНИТЕЛЯ 🎧",
+        expectedInput: ["Macan", "Макан"],
+        hint: "Это самая мужицкая песня",
+        errorMeme: "❌ НЕВЕРНО! Попробуй прослушать еще раз <br>",
+        successMsg: "✅ ВЕРНО!"
+    },
+    
+    {
+        type: "qr",
+        text: "🔍 QR_CITY: Отсканируй QR-код с координатами и напиши название города",
+        mediaUrl: "https://quickchart.io/qr?text=48.480223,135.071915&size=300&dark=ff3366&light=000000&margin=2",
+        mediaCaption: "🗺️ QR-КОД СОДЕРЖИТ КООРДИНАТЫ ГОРОДА",
+        expectedInput: "Хабаровск",
+        hint: "Удачи в поисках",
+        errorMeme: "❌ НЕВЕРНО! /n Проверь координаты и найди город на карте",
+        successMsg: "✅ ВЕРНО! Это Хабаровск!"
+    },
 
-{
-    type: "ai_vision",
-    text: "📸 AI_SCANNER: Нужен любой телефон, чтобы перенести вирус",
-    hint: "Наведи камеру на телефон, на который отправится вирус",
-    errorMeme: "❌ ТЕЛЕФОН НЕ РАСПОЗНАН! Попробуй ещё раз!",
-    successMsg: "✅ ТЕЛЕФОН РАСПОЗНАН! ДОСТУП РАЗРЕШЁН!"
-}
+    {
+        type: "media",
+        mediaType: "image",
+        mediaUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/友-order.gif/250px-友-order.gif",
+        mediaCaption: "💀 ПЕРЕХВАТЧЕН ИЕРОГЛИФ 💀",
+        text: "🔓 ЧТО ОЗНАЧАЕТ ЭТОТ ИЕРОГЛИФ?",
+        options: ["Друг", "Любовь", "Семья", "Мир"],
+        correct: "Друг",
+        errorMeme: "❌ НЕВЕРНО! 朋友 — это 'ДРУГ'",
+        successMsg: "✅ ВЕРНО! 朋友 = ДРУГ!"
+    },
 /*
-{
-    type: "shake",
-    text: "📱 SHAKE_DETECTOR: Вирус заблокировал доступ к файлу. Нужно потрясти телефон, чтобы восстановить код доступа!",
-    hint: "🔥 ПОТРЯСИ ТЕЛЕФОН, ЧТОБЫ АКТИВИРОВАТЬ ДЕКОДЕР!",
-    errorMeme: "❌ КОД НЕ СОШЕЛСЯ! Попробуй еще раз потрясти телефон!",
-    successMsg: "✅ КОД ВОССТАНОВЛЕН! ДОСТУП РАЗРЕШЁН!",
-    targetCode: [2, 0, 0, 3],
-    shakeCount: 5
-}
+    {
+        type: "sql",
+        text: "SQL_INJECTION: База данных заблокирована. Необходим вывод данных из базы пользователя",
+        sqlTemplate: "SELECT * FROM users_telegram <br>WHERE username = 'iva6ka_who'<br>AND about = '",
+        sqlSuffix: "'",
+        expectedInput: "погугли",
+        hint: "Нужно значение из атрибута 'о себе'",
+        errorMeme: "💾 SQL ERROR! База не поддалась...",
+        successMsg: "💾 SQL INJECTION УСПЕШНА! Доступ получен!"
+    },
+*/
+    {
+        type: "bruteforce",
+        text: "BRUTEFORCE_ATTACK: Узнай PIN-код от сервера. Подсказки:",
+        clues: [
+            "Первая цифра — последняя цифра в номере @Lizz_SHE",
+            "Вторая цифра — третья цифра в номере @ezidka",
+            "Третья цифра — предпоследняя цифра в номере @vadimka_O9",
+            "Последняя цифра — пятая цифра в номере @evil_symphony)"
+        ],
+        expected: "5851",
+        errorMeme: "💢 НЕВЕРНЫЙ PIN!",
+        successMsg: "🔓 PIN ПРИНЯТ! ДОСТУП РАЗРЕШЁН!"
+    },
+    /*
+    {
+        type: "media",
+        mediaType: "video",
+        mediaUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
+        mediaCaption: "Наше бессмертное видео 🎥",
+        text: "ЧТО МЫ КРИЧАЛИ В ЭТОМ ВИДЕО?",
+        options: ["Победа!", "Деплой!", "Баги вон!", "Пицца!"],
+        correct: "Деплой!",
+        errorMeme: "🎬 ПЕРЕСМОТРИ ВИДЕО!",
+        successMsg: "🎬 ТОЧНО! ЭТО БЫЛ ЛЕГЕНДАРНЫЙ ДЕПЛОЙ!"
+    },*/
+    
+    {
+        type: "ai_vision",
+        text: "📸 AI_SCANNER: Нужен любой телефон, чтобы перенести вирус",
+        hint: "Наведи камеру на телефон, на который отправится вирус",
+        errorMeme: "❌ ТЕЛЕФОН НЕ РАСПОЗНАН! Попробуй ещё раз! Возьми телефон в руку",
+        successMsg: "✅ ТЕЛЕФОН РАСПОЗНАН! ДОСТУП РАЗРЕШЁН!"
+    }
+];
 
-            {
-                type: "qr",
-                text: "🔓 QR_HACK_SCANNER: Отсканируй QR-код и введи расшифрованное сообщение",
-                mediaUrl: "https://quickchart.io/qr?text=PISKA_POPKA&size=300&dark=ff3366&light=000000&margin=2",
-                mediaCaption: "💀 QR-КОД СОДЕРЖИТ СЕКРЕТНЫЙ КЛЮЧ 💀",
-                expectedInput: "PISKA_POPKA",
-                hint: "Отсканируй QR-код и введи текст, который увидишь",
-                errorMeme: "❌ QR-КОД НЕ РАСПОЗНАН! ДОСТУП ЗАПРЕЩЕН!",
-                successMsg: "✅ QR-КОД УСПЕШНО РАСШИФРОВАН! ДОСТУП РАЗРЕШЕН!"
-            },
-         
-
-            {
-                type: "audio",
-                text: "🎵 MUSIC_QUIZ: Прослушай трек и напиши его название",
-                audioUrl: "music.mp3",
-                audioCaption: "🎧 УГАДАЙ МЕЛОДИЮ 🎧\n[ПОДСКАЗКА: это песня про день рождения]",
-                expectedInput: "С днем рождения",
-                hint: "Эту песню поют на всех днях рождения",
-                errorMeme: "❌ НЕВЕРНО! Попробуй прослушать еще раз",
-                successMsg: "✅ ВЕРНО! Это песня 'С днем рождения'!"
-            },
-           
-            {
-                type: "qr",
-                text: "🔍 QR_CITY: Отсканируй QR-код с координатами и напиши название города",
-                mediaUrl: "https://quickchart.io/qr?text=48.480223,135.071915&size=300&dark=ff3366&light=000000&margin=2",
-                mediaCaption: "🗺️ QR-КОД СОДЕРЖИТ КООРДИНАТЫ ГОРОДА",
-                expectedInput: "Хабаровск",
-                hint: "Удачи в поисках",
-                errorMeme: "❌ НЕВЕРНО! Проверь координаты и найди город на карте",
-                successMsg: "✅ ВЕРНО! Это Хабаровск!"
-            },
-
-            {
-                type: "media",
-                mediaType: "image",
-                mediaUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/友-order.gif/250px-友-order.gif",
-                mediaCaption: "💀 ПЕРЕХВАТЧЕН ИЕРОГЛИФ 💀",
-                text: "🔓 ЧТО ОЗНАЧАЕТ ЭТОТ ИЕРОГЛИФ?",
-                options: ["Друг", "Любовь", "Семья", "Мир"],
-                correct: "Друг",
-                errorMeme: "❌ НЕВЕРНО! 朋友 — это 'ДРУГ'",
-                successMsg: "✅ ВЕРНО! 朋友 = ДРУГ!"
-            }
-                 
-            
-
-            
-
-            /*
-            {
-                type: "sql",
-                text: "SQL_INJECTION: База данных заблокирована. Необходим вывод данных из базы пользователя",
-                sqlTemplate: "SELECT * FROM users_telegram <br>WHERE username = 'iva6ka_who'<br>AND about = '",
-                sqlSuffix: "'",
-                expectedInput: "погугли",
-                hint: "Нужно значение из атрибута 'о себе'",
-                errorMeme: "💾 SQL ERROR! База не поддалась...",
-                successMsg: "💾 SQL INJECTION УСПЕШНА! Доступ получен!"
-            },
-            
-            {
-                type: "hash",
-                text: "HASH_CRACKING: Перехвачен хеш пароля. Расшифруй ключ:",
-                hashValue: "7e1e9cdc9aa24344750971015a65763a",
-                hint: "Это MD5, слово из 6 букв",
-                expected: "volkov",
-                errorMeme: "🔐 ХЕШ НЕ РАСШИФРОВАН!",
-                successMsg: "🔐 ХЕШ ВЗЛОМАН!"
-            },
-
-            {
-                type: "choice",
-                text: "АНАЛИЗ СБОЕВ: Что стало причиной легендарного бага в продакшене?",
-                options: ["Забыли WHERE", "CORS", "git push --force", "Docker"],
-                correct: "git push --force",
-                errorMeme: "💀 ОШИБКА! git push --force — это больно",
-                successMsg: "✅ ДА! Мы это никогда не забудем"
-            },
-
-            {
-                type: "binary",
-                text: "BINARY_DECODER: Расшифруй бинарный код:",
-                binaryValue: "01110111 01100001 01101110 01111001 01100001",
-                hint: "Бинарный код в ASCII. Это имя именинника",
-                expected: "wanya",
-                errorMeme: "💻 НЕВЕРНО! Попробуй перевести в текст (имя именинника)",
-                successMsg: "💻 ДЕКОДИРОВАНО! Это имя именинника!"
-            },
-
-            {
-                type: "input",
-                text: "РАСШИФРОВКА МЕМА: Наша общая фраза, когда всё падает?",
-                expectedKeywords: ["локально", "работает локально", "на моей машине"],
-                errorMeme: "🤡 НЕ УГАДАЛ! Это классика айтишников",
-                successMsg: "✅ ПОЗОРНО, НО ВЕРНО! 'На моей машине работает'"
-            },
-
-            {
-                type: "bruteforce",
-                text: "BRUTEFORCE_ATTACK: Узнай PIN-код от сервера. Подсказки:",
-                clues: [
-                    "Первая цифра — последняя цифра в номере @Lizz_SHE",
-                    "Вторая цифра — третья цифра в номере @ezidka",
-                    "Третья цифра — предпоследняя цифра в номере @vadimka_O9",
-                    "Последняя цифра — пятая цифра в номере @evil_symphony)"
-                ],
-                expected: "5851",
-                errorMeme: "💢 НЕВЕРНЫЙ PIN! Доступ закрыт на 30 секунд",
-                successMsg: "🔓 PIN ПРИНЯТ! ДОСТУП РАЗРЕШЁН!"
-            },
-
-            {
-                type: "media",
-                mediaType: "video",
-                mediaUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-                mediaCaption: "Наше бессмертное видео 🎥",
-                text: "ЧТО МЫ КРИЧАЛИ В ЭТОМ ВИДЕО?",
-                options: ["Победа!", "Деплой!", "Баги вон!", "Пицца!"],
-                correct: "Деплой!",
-                errorMeme: "🎬 ПЕРЕСМОТРИ ВИДЕО!",
-                successMsg: "🎬 ТОЧНО! ЭТО БЫЛ ЛЕГЕНДАРНЫЙ ДЕПЛОЙ!"
-            },
-            
-            {
-                type: "debug",
-                text: "DEBUG_ALERT: Найди и исправь ошибку в коде, чтобы функция вернула сумму:",
-                buggyCode: `function sum(a, b) {
-    return a + b;
-    console.log("Done");
-}`,
-                expectedPatterns: ["console.log", "return"],
-                hint: "Код после return никогда не выполнится. Нужно поменять порядок строк или убрать console.log",
-                errorMeme: "🐛 БАГ ОСТАЛСЯ! Код не скомпилится",
-                successMsg: "🐛 БАГ ИСПРАВЛЕН! Код работает!"
-            },
-            {
-                type: "choice",
-                text: "Что мы коллективно ненавидим на работе?",
-                options: ["Windows", "Jira", "Teams", "Excel"],
-                correct: "Jira",
-                errorMeme: "❌ ДЖИРА ПЛАЧЕТ. Это Jira!",
-                successMsg: "✅ ДА, ЭТО АД. Jira — наша боль"
-            },
-            {
-                type: "regex",
-                text: "REGEX_CHALLENGE: Напиши регулярное выражение, которое найдёт секретную строку 'gift_2024':",
-                sampleText: "secret_key=abc123 gift_2024 hidden_data=xyz",
-                expectedKeywords: ["gift_2024", "gift", "2024"],
-                hint: "Просто найди слово gift_2024",
-                errorMeme: "🔍 REGEX НЕ СРАБОТАЛ! Попробуй /gift_2024/",
-                successMsg: "🔍 REGEX НАШЁЛ! Секретная строка обнаружена!"
-            },
-            {
-                type: "choice",
-                text: "Мем нашей реакции, когда прод упал в пятницу?",
-                options: ["This is fine", "Компьютер говорит нет", "Я в отпуске", "Перезагрузка"],
-                correct: "This is fine",
-                errorMeme: "🔥 НЕТ! Собака в огне — наш мем",
-                successMsg: "🐶 СОБАКА В ОГНЕ! Это точно мы"
-            },
-            {
-                type: "choice",
-                text: "DNS_CONFIG: Какой тип записи нужно добавить, чтобы указать IP адрес сервера с подарком?",
-                options: ["A запись", "CNAME запись", "MX запись", "TXT запись"],
-                correct: "A запись",
-                errorMeme: "🌐 НЕВЕРНО! A запись указывает на IP",
-                successMsg: "🌐 DNS НАСТРОЕН! Домен ведёт к подарку!"
-            },
-            {
-                type: "command",
-                text: "DATA_RECOVERY: Файл с подсказкой удалён. Введи команду git для восстановления последнего удалённого файла:",
-                expectedKeywords: ["checkout", "restore", "reset"],
-                hint: "git команда для отмены последнего изменения (git checkout или git restore)",
-                errorMeme: "❌ ФАЙЛ НЕ ВОССТАНОВЛЕН! Попробуй git checkout или git restore",
-                successMsg: "📁 ФАЙЛ ВОССТАНОВЛЕН! Подсказка получена!"
-            }
-                */
-        ];
         
         let currentIndex = 0;
         let quizContainer = document.getElementById('quizContainer');
@@ -226,23 +107,6 @@
 
         let globalCelebrationInterval = null;
         
-// Запрос разрешения на датчики движения для iOS
-async function requestMotionPermission() {
-    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-        try {
-            const permission = await DeviceMotionEvent.requestPermission();
-            if (permission === 'granted') {
-                console.log('Motion permission granted');
-            }
-        } catch (e) {
-            console.log('Motion permission denied:', e);
-        }
-    }
-}
-
-// Вызываем при старте квеста
-// Можно добавить в startQuest() после инициализации
-
         function generateCaptchaQuestion() {
             const questions = [
                 { text: "Твой год рождения?", answer: "2003" }
@@ -359,17 +223,22 @@ async function requestMotionPermission() {
             }, 500);
         }
 
-        // ХАКЕРСКИЙ ДИНАМИЧЕСКИЙ ФОН
+// ХАКЕРСКИЙ ДИНАМИЧЕСКИЙ ФОН
 let hackerOverlay = null;
 let hackerIntervals = [];
 
 function startHackerBackground() {
+    // Останавливаем старый фон, если есть
+    stopHackerBackground();
+    
     // Создаем оверлей для хакерских элементов
     if (hackerOverlay) hackerOverlay.remove();
     
     hackerOverlay = document.createElement('div');
     hackerOverlay.className = 'hacker-overlay';
     document.body.appendChild(hackerOverlay);
+    
+    hackerIntervals = []; // Очищаем массив
     
     // 1. Сканирующие линии
     function addScanLine() {
@@ -382,13 +251,13 @@ function startHackerBackground() {
     }
     
     const scanInterval = setInterval(() => {
-        if (quizContainer.style.display !== 'none') {
+        if (quizContainer && quizContainer.style.display !== 'none') {
             addScanLine();
         }
     }, 2000);
     hackerIntervals.push(scanInterval);
     
-    // 2. Текстовые строки взлома (IP, порты, пакеты)
+    // 2. Текстовые строки взлома (IP, порты, пакеты) - БЕГУЩИЕ СТРОКИ
     const hackTexts = [
         '[SYSTEM] SCANNING IP: 192.168.1.' + Math.floor(Math.random() * 255),
         '[NETWORK] PACKET LOSS: ' + Math.floor(Math.random() * 30) + '%',
@@ -409,7 +278,19 @@ function startHackerBackground() {
         '[VPN] TUNNEL ESTABLISHED',
         '[WIFI] DEAUTH PACKETS SENT',
         '[BLUETOOTH] HID ATTACK INITIATED',
-        '[USB] RUBBER DUCKY DETECTED'
+        '[USB] RUBBER DUCKY DETECTED',
+        '>_ sudo rm -rf / --no-preserve-root',
+        '>_ chmod 777 /etc/passwd',
+        '>_ echo "hacked" > /dev/mem',
+        '>_ nc -lvp 4444 -e /bin/bash',
+        '>_ hydra -l root -P rockyou.txt ssh://target',
+        '>_ sqlmap -u target.com?id=1 --dbs',
+        '>_ nmap -sS -p- -T4 target.com',
+        '>_ metasploit: exploit/multi/handler',
+        '>_ wireshark: capturing packets',
+        '>_ john --format=raw-md5 hash.txt',
+        '>_ aircrack-ng -w wordlist.cap',
+        '>_ hashcat -m 0 hash.txt rockyou.txt'
     ];
     
     function addHackLine() {
@@ -417,18 +298,22 @@ function startHackerBackground() {
         line.className = 'hack-line';
         line.textContent = hackTexts[Math.floor(Math.random() * hackTexts.length)];
         line.style.top = (Math.random() * 90 + 5) + '%';
-        line.style.fontSize = (Math.random() * 5 + 9) + 'px';
-        line.style.animationDuration = (Math.random() * 8 + 5) + 's';
-        line.style.animationDelay = (Math.random() * 2) + 's';
+        line.style.fontSize = (Math.random() * 6 + 11) + 'px';
+        line.style.animationDuration = (Math.random() * 10 + 8) + 's';
+        line.style.animationDelay = (Math.random() * 3) + 's';
         hackerOverlay.appendChild(line);
-        setTimeout(() => line.remove(), 10000);
+        setTimeout(() => line.remove(), 12000);
     }
     
     const hackLineInterval = setInterval(() => {
-        if (quizContainer.style.display !== 'none') {
-            for(let i = 0; i < 2; i++) addHackLine();
+        if (quizContainer && quizContainer.style.display !== 'none') {
+            // Добавляем 2-3 строки каждые 600ms
+            const count = Math.floor(Math.random() * 2) + 2;
+            for(let i = 0; i < count; i++) {
+                setTimeout(() => addHackLine(), i * 150);
+            }
         }
-    }, 800);
+    }, 600);
     hackerIntervals.push(hackLineInterval);
     
     // 3. Статичные терминальные строки (по краям)
@@ -457,19 +342,19 @@ function startHackerBackground() {
         const line = document.createElement('div');
         line.className = 'terminal-line';
         line.textContent = terminalCommands[Math.floor(Math.random() * terminalCommands.length)];
-        line.style.left = (Math.random() * 70 + 5) + '%';
-        line.style.bottom = (Math.random() * 80 + 10) + 'px';
-        line.style.fontSize = (Math.random() * 4 + 8) + 'px';
-        line.style.opacity = Math.random() * 0.5 + 0.2;
+        line.style.left = (Math.random() * 80 + 10) + '%';
+        line.style.bottom = (Math.random() * 90 + 5) + 'px';
+        line.style.fontSize = (Math.random() * 5 + 9) + 'px';
+        line.style.opacity = Math.random() * 0.4 + 0.15;
         hackerOverlay.appendChild(line);
-        setTimeout(() => line.remove(), 15000);
+        setTimeout(() => line.remove(), 18000);
     }
     
     const terminalInterval = setInterval(() => {
-        if (quizContainer.style.display !== 'none') {
+        if (quizContainer && quizContainer.style.display !== 'none') {
             addTerminalLine();
         }
-    }, 3000);
+    }, 2500);
     hackerIntervals.push(terminalInterval);
     
     // 4. Сканирование портов (летающие цифры)
@@ -479,37 +364,37 @@ function startHackerBackground() {
         port.textContent = `PORT ${Math.floor(Math.random() * 65535)} [${Math.random() > 0.8 ? 'OPEN' : 'FILTERED'}]`;
         port.style.left = (Math.random() * 90 + 5) + '%';
         port.style.top = (Math.random() * 90 + 5) + '%';
-        port.style.fontSize = (Math.random() * 4 + 9) + 'px';
+        port.style.fontSize = (Math.random() * 5 + 10) + 'px';
         hackerOverlay.appendChild(port);
-        setTimeout(() => port.remove(), 2000);
+        setTimeout(() => port.remove(), 2500);
     }
     
     const portInterval = setInterval(() => {
-        if (quizContainer.style.display !== 'none' && Math.random() > 0.6) {
+        if (quizContainer && quizContainer.style.display !== 'none' && Math.random() > 0.6) {
             addPortScan();
         }
-    }, 1500);
+    }, 1200);
     hackerIntervals.push(portInterval);
     
     // 5. Анимированные квадраты (шифрование)
     function addEncryptBox() {
         const box = document.createElement('div');
         box.className = 'encrypt-box';
-        const size = Math.random() * 50 + 20;
+        const size = Math.random() * 60 + 25;
         box.style.width = size + 'px';
         box.style.height = size + 'px';
         box.style.left = (Math.random() * 90 + 5) + '%';
         box.style.top = (Math.random() * 90 + 5) + '%';
         box.style.animationDuration = (Math.random() * 2 + 1) + 's';
         hackerOverlay.appendChild(box);
-        setTimeout(() => box.remove(), 3000);
+        setTimeout(() => box.remove(), 3500);
     }
     
     const encryptInterval = setInterval(() => {
-        if (quizContainer.style.display !== 'none' && Math.random() > 0.85) {
+        if (quizContainer && quizContainer.style.display !== 'none' && Math.random() > 0.85) {
             addEncryptBox();
         }
-    }, 2000);
+    }, 1800);
     hackerIntervals.push(encryptInterval);
     
     // 6. ASCII арт (редко)
@@ -525,7 +410,14 @@ function startHackerBackground() {
 _____/ \\___/|___/`,
         `┌┐ ┌─┐┬ ┬┌┐┌┌─┐
 ├┴┐├┤ └┬┘││││ │
-└─┘└─┘ ┴ ┘└┘└─┘`
+└─┘└─┘ ┴ ┘└┘└─┘`,
+        `  ╔═╗╦ ╦╔═╗╔═╗
+  ║  ╠═╣║╣ ║╣ 
+  ╚═╝╩ ╩╚═╝╚═╝`,
+        `  ╭━━━╮
+  ┃ H4X ┃
+  ┃ 0x7F ┃
+  ╰━━━╯`
     ];
     
     function addAsciiArt() {
@@ -534,20 +426,78 @@ _____/ \\___/|___/`,
         art.textContent = asciiArts[Math.floor(Math.random() * asciiArts.length)];
         art.style.left = (Math.random() * 80 + 10) + '%';
         art.style.top = (Math.random() * 80 + 10) + '%';
-        art.style.fontSize = (Math.random() * 4 + 7) + 'px';
+        art.style.fontSize = (Math.random() * 5 + 8) + 'px';
         hackerOverlay.appendChild(art);
-        setTimeout(() => art.remove(), 5000);
+        setTimeout(() => art.remove(), 6000);
     }
     
     const asciiInterval = setInterval(() => {
-        if (quizContainer.style.display !== 'none' && Math.random() > 0.92) {
+        if (quizContainer && quizContainer.style.display !== 'none' && Math.random() > 0.92) {
             addAsciiArt();
         }
-    }, 4000);
+    }, 3500);
     hackerIntervals.push(asciiInterval);
     
-    // Сохраняем интервалы для очистки
+    // 7. БЕГУЩАЯ СТРОКА ВНИЗУ (дополнительная)
+    function addMarqueeLine() {
+        const marquee = document.createElement('div');
+        marquee.className = 'hack-marquee';
+        const messages = [
+            '⚠️ SYSTEM BREACH DETECTED ⚠️',
+            '🔥 FIREWALL BYPASS IN PROGRESS 🔥',
+            '💀 ROOT ACCESS ATTEMPT #' + Math.floor(Math.random() * 9999),
+            '🔓 DECRYPTING MEMORY DUMP...',
+            '📡 PACKET SNIFFING ACTIVE',
+            '⚡ EXPLOIT EXECUTED SUCCESSFULLY',
+            '🎯 TARGET ACQUIRED: VANYA_HACK',
+            '🔐 SSL CERTIFICATE SPOOFED',
+            '💾 DATABASE DUMP IN PROGRESS',
+            '🕸️ TOR NETWORK ROUTING ACTIVE'
+        ];
+        marquee.textContent = messages[Math.floor(Math.random() * messages.length)];
+        marquee.style.cssText = `
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            white-space: nowrap;
+            color: #ff3366;
+            font-family: monospace;
+            font-size: 11px;
+            background: rgba(0,0,0,0.7);
+            padding: 4px 10px;
+            border-radius: 4px;
+            animation: marqueeSlide ${Math.random() * 15 + 10}s linear forwards;
+            z-index: 100;
+            pointer-events: none;
+            text-shadow: 0 0 3px #ff3366;
+        `;
+        hackerOverlay.appendChild(marquee);
+        setTimeout(() => marquee.remove(), 15000);
+    }
+    
+    const marqueeInterval = setInterval(() => {
+        if (quizContainer && quizContainer.style.display !== 'none' && Math.random() > 0.7) {
+            addMarqueeLine();
+        }
+    }, 4000);
+    hackerIntervals.push(marqueeInterval);
+    
+    // Сохраняем интервалы в window.hackerIntervals для очистки
     window.hackerIntervals = hackerIntervals;
+    
+    console.log('[HACKER] Фон запущен, интервалов:', hackerIntervals.length);
+}
+
+function stopHackerBackground() {
+    if (window.hackerIntervals) {
+        window.hackerIntervals.forEach(interval => clearInterval(interval));
+        window.hackerIntervals = [];
+    }
+    if (hackerOverlay) {
+        hackerOverlay.remove();
+        hackerOverlay = null;
+    }
+    console.log('[HACKER] Фон остановлен');
 }
 
 function stopHackerBackground() {
@@ -785,7 +735,7 @@ function stopHackerBackground() {
             const box = document.createElement('div');
             box.className = 'error-message-box';
             box.innerHTML = `<div style="color:#ff3333; font-size:26px; margin-bottom:15px;">⚠️CRITICAL ERROR⚠️</div>
-                             <div style="color:#ff8888; font-size:16px;">${errorMsg}<br><small>${['ВОСПОМИНАНИЯ ПОВРЕЖДЕНЫ','СИСТЕМА ВЗЛОМАНА','ДОСТУП ЗАПРЕЩЕН'][Math.floor(Math.random()*3)]}</small></div>
+                             <div style="color:#ff8888; font-size:16px;">${errorMsg}<br><small>${['<BR>ФАЙЛЫ ПОВРЕЖДЕНЫ','<BR>СИСТЕМА ВЗЛОМАНА','<BR>ДОСТУП ЗАПРЕЩЕН'][Math.floor(Math.random()*3)]}</small></div>
                              <button class="restart-btn-error" id="restartErrorBtn">⟳ ПЕРЕЗАПУСТИТЬ КВЕСТ ⟳</button>`;
             
             overlay.appendChild(matrix);
@@ -938,13 +888,13 @@ function removeHackerTopPanel() {
                 const captchaBox = document.createElement('div');
                 captchaBox.className = 'captcha-box';
                 captchaBox.innerHTML = `
-                    <div class="captcha-title">⚠️ HUMAN_VERIFICATION ⚠️</div>
+                    <div class="captcha-title">⚠️HUMAN_VERIFICATION⚠️</div>
                     <div class="captcha-subtitle">[ СИСТЕМА ТРЕБУЕТ ПОДТВЕРЖДЕНИЕ ЛИЧНОСТИ ]</div>
                     <div class="captcha-question">
                         <div class="captcha-question-text">🔐 ${currentCaptcha.text} 🔐</div>
                         <div class="captcha-input-group">
                             <input type="text" id="captchaInput" class="captcha-input" placeholder="ВВЕДИ ОТВЕТ..." autocomplete="off">
-                            <button id="captchaSubmitBtn" class="captcha-btn">✅ ПРОВЕРИТЬ</button>
+                            <button id="captchaSubmitBtn" class="captcha-btn">ОТПРАВИТЬ</button>
                         </div>
                         <div id="captchaError" class="captcha-error" style="display: none;"></div>
                         <div class="captcha-attempts">ОСТАЛОСЬ ПОПЫТОК: ${MAX_ATTEMPTS - captchaAttempts}</div>
@@ -968,7 +918,7 @@ function removeHackerTopPanel() {
                     if (isCorrect) {
                         captchaError.style.display = 'none';
                         captchaError.style.color = '#88ffaa';
-                        captchaError.textContent = '✅ ВЕРИФИКАЦИЯ УСПЕШНА! ДОСТУП РАЗРЕШЁН...';
+                        captchaError.textContent = '✅ ВЕРИФИКАЦИЯ УСПЕШНА!';
                         captchaError.style.display = 'block';
                         
                         setTimeout(() => {
@@ -996,7 +946,7 @@ function removeHackerTopPanel() {
                         } else {
                             captchaError.style.display = 'block';
                             captchaError.style.color = '#ff6666';
-                            captchaError.textContent = `❌ НЕВЕРНО! Осталось ${remaining} попыток...`;
+                            captchaError.textContent = `❌ НЕВЕРНО!`;
                             captchaInput.value = '';
                             captchaInput.focus();
                             
@@ -1016,42 +966,121 @@ function removeHackerTopPanel() {
             });
         }
         
-        // ОТРИСОВКА ТЕКУЩЕГО ВОПРОСА
-        async function renderCurrent() {
-
-stopShakeDetection();
-    isShakeTaskActive = false;
-
-            if (window.aiCameraCleanup) {
+// ОТРИСОВКА ТЕКУЩЕГО ВОПРОСА
+// ОТРИСОВКА ТЕКУЩЕГО ВОПРОСА
+async function renderCurrent() {
+    if (window.aiCameraCleanup) {
         window.aiCameraCleanup();
         window.aiCameraCleanup = null;
     }
 
-            if (currentIndex >= questions.length) {
-                stopHackBackgroundAnimations();
-                quizContainer.style.display = 'none';
-                
-                try {
-                    await showCaptcha();
-                    showFinalCelebration();
-                } catch (error) {
-                    showCaptchaFailScreen();
-                }
-                return;
+    if (currentIndex >= questions.length) {
+        stopHackBackgroundAnimations();
+        quizContainer.style.display = 'none';
+        
+        try {
+            await showCaptcha();
+            showFinalCelebration();
+        } catch (error) {
+            showCaptchaFailScreen();
+        }
+        return;
+    }
+    
+    if (mediaGlitchInterval) {
+        clearInterval(mediaGlitchInterval);
+        mediaGlitchInterval = null;
+    }
+    
+    const q = questions[currentIndex];
+    const progressPercent = (currentIndex / questions.length) * 100;
+    
+    let html = `<div class="progress-bar-container"><div class="progress-fill" style="width: ${progressPercent}%;"></div></div>`;
+    html += `<div class="question-box"><div id="questionText" class="question-text"></div>`;
+    
+    // ========== АУДИО ВОПРОС ==========
+    if (q.type === "audio") {
+        html += `
+            <div class="media-container hacker-audio">
+                <div class="audio-player-wrapper">
+                    <div class="audio-visualizer">🎵 🔊 🎵</div>
+                    <audio controls class="audio-player"  
+       controlsList="nodownload noplaybackrate nofullscreen" 
+       disableRemotePlayback> 
+                        <source src="${q.audioUrl}" type="audio/mpeg">
+                        Ваш браузер не поддерживает аудио
+                    </audio>
+                    <div class="audio-tip">💡 Рекомендуем включить звук на полную</div>
+                </div>
+                ${q.audioCaption ? `<div class="media-caption hacker-caption">${q.audioCaption}</div>` : ''}
+            </div>
+            <div class="input-group">
+                <input type="text" id="audioInput" class="terminal-input" placeholder="ВВЕДИ ИСПОЛНИТЕЛЯ..." autocomplete="off">
+                <button id="audioSubmitBtn" class="submit-btn">ОТПРАВИТЬ</button>
+            </div>
+            <div class="hint-text">💡 ${q.hint}</div>
+        `;
+        
+        html += `</div>`;
+        appDiv.innerHTML = html;
+        
+        const questionElement = document.getElementById('questionText');
+        await typeText(questionElement, `> ${q.text}`, 25);
+        
+        const cursor = document.createElement('span');
+        cursor.className = 'typing-cursor';
+        questionElement.appendChild(cursor);
+        
+        const audioInput = document.getElementById('audioInput');
+        const audioSubmit = document.getElementById('audioSubmitBtn');
+        
+        function checkAudioAnswer() {
+            const userAnswer = audioInput.value.trim().toLowerCase();
+            
+            let isCorrect = false;
+            if (Array.isArray(q.expectedInput)) {
+                isCorrect = q.expectedInput.some(expected => 
+                    userAnswer === expected.toLowerCase()
+                );
+            } else if (typeof q.expectedInput === 'string') {
+                isCorrect = userAnswer === q.expectedInput.toLowerCase();
             }
             
-            if (mediaGlitchInterval) {
-                clearInterval(mediaGlitchInterval);
-                mediaGlitchInterval = null;
+            if (isCorrect) {
+                showMessage(q.successMsg);
+                currentIndex++;
+                renderCurrent();
+            } else {
+                showFullscreenError(q.errorMeme);
             }
-            
-            const q = questions[currentIndex];
-            const progressPercent = (currentIndex / questions.length) * 100;
-            
-            let html = `<div class="progress-bar-container"><div class="progress-fill" style="width: ${progressPercent}%;"></div></div>`;
-            html += `<div class="question-box"><div id="questionText" class="question-text"></div>`;
-             if (q.type === "shake") {
-        html += `</div>`; // закрываем question-box
+        }
+        
+        if (audioSubmit) audioSubmit.onclick = checkAudioAnswer;
+        if (audioInput) audioInput.onkeypress = (e) => {
+            if (e.key === 'Enter') checkAudioAnswer();
+        };
+        
+        return;
+    }
+    
+    // ========== AI VISION ВОПРОС (КАМЕРА) ==========
+    else if (q.type === "ai_vision") {
+        html += `
+            <div class="ai-camera-container">
+                <div class="ai-preview">
+                    <div class="ai-detection-result" id="aiDetectionResult">
+                        📸 Наведи камеру на телефон и нажми "РАСПОЗНАТЬ"
+                    </div>
+                </div>
+                <video id="aiVideo" class="ai-video" autoplay playsinline muted></video>
+                <canvas id="aiCanvas" class="ai-canvas"></canvas>
+                <button class="ai-capture-btn" id="aiCaptureBtn">🔍 РАСПОЗНАТЬ</button>
+                <div class="ai-status" id="aiStatus">⚡ Загрузка...</div>
+            </div>
+            <div class="hint-text">💡 ${q.hint}</div>
+        `;
+        
+        html += `</div>`;
         appDiv.innerHTML = html;
         
         // Анимация печатания вопроса
@@ -1062,515 +1091,326 @@ stopShakeDetection();
         cursor.className = 'typing-cursor';
         questionElement.appendChild(cursor);
         
-        // Рендерим задание с тряской
-        await renderShakeTask(q);
-        return;
-    }
-            // Медиа контент для media типа
-            else if (q.type === "media") {
-                html += `<div class="media-container" id="mediaContainer">`;
-                if (q.mediaType === "image") {
-                    html += `<img src="${q.mediaUrl}" alt="memory" id="mediaElement" style="max-width:100%; max-height:200px; border-radius:8px;">`;
-                } else if (q.mediaType === "video") {
-                    html += `<video controls id="mediaElement" style="max-width:100%; max-height:200px; border-radius:8px;">
-                                <source src="${q.mediaUrl}" type="video/mp4">
-                                Ваш браузер не поддерживает видео
-                             </video>`;
-                }
-                if (q.mediaCaption) html += `<div class="media-caption">📸 ${q.mediaCaption}</div>`;
-                html += `</div>`;
-                // Добавляем блок с ответами ДЛЯ media типа
-                html += `<div class="answers" id="answersContainer"></div>`;
-            }
-
-
-            // Аудио вопрос (с плеером)
-// Аудио вопрос (с плеером)
-// Аудио вопрос (с плеером)
-else if (q.type === "audio") {
-    html += `
-        <div class="media-container hacker-audio">
-            <div class="audio-player-wrapper">
-                <div class="audio-visualizer">🎵 🔊 🎵</div>
-                <audio controls class="audio-player">
-                    <source src="${q.audioUrl}" type="audio/mpeg">
-                    Ваш браузер не поддерживает аудио
-                </audio>
-                <div class="audio-tip">💡 Рекомендуем использовать наушники</div>
-            </div>
-            ${q.audioCaption ? `<div class="media-caption hacker-caption">📻 ${q.audioCaption}</div>` : ''}
-        </div>
-        <div class="input-group">
-            <input type="text" id="audioInput" class="terminal-input" placeholder="ВВЕДИ НАЗВАНИЕ ПЕСНИ..." autocomplete="off">
-            <button id="audioSubmitBtn" class="submit-btn">[ VERIFY ]</button>
-        </div>
-        <div class="hint-text">💡 ${q.hint}</div>
-    `;
-}
-
-else if (q.type === "ai_vision") {
-    html += `
-        <div class="ai-camera-container">
-            <div class="ai-preview">
-                <div class="ai-detection-result" id="aiDetectionResult">
-                    📸 Наведи камеру на телефон
-                </div>
-            </div>
-            <video id="aiVideo" class="ai-video" autoplay playsinline muted></video>
-            <canvas id="aiCanvas" class="ai-canvas"></canvas>
-            <button class="ai-capture-btn" id="aiCaptureBtn">🔍 РАСПОЗНАТЬ</button>
-            <div class="ai-status" id="aiStatus">⚡ Загрузка ИИ модели...</div>
-        </div>
-        <div class="hint-text">💡 ${q.hint}</div>
-    `;
-    
-    setTimeout(async () => {
-        const video = document.getElementById('aiVideo');
-        const canvas = document.getElementById('aiCanvas');
-        const captureBtn = document.getElementById('aiCaptureBtn');
-        const statusDiv = document.getElementById('aiStatus');
-        const resultDiv = document.getElementById('aiDetectionResult');
-        
-        let model = null;
-        let stream = null;
-        let isProcessing = false;
-        
-        // Список объектов, которые считаются телефонами
-        const phoneClasses = ['cell phone', 'smartphone', 'mobile phone', 'phone'];
-        
-        // Функция инициализации камеры
-        async function initCamera() {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { 
-                        facingMode: 'environment', // Задняя камера
-                        width: { ideal: 640 },
-                        height: { ideal: 480 }
-                    } 
-                });
-                video.srcObject = stream;
-                await video.play();
-                statusDiv.innerHTML = '✅ Камера готова! Наведи на телефон и нажми "РАСПОЗНАТЬ"';
-                statusDiv.className = 'ai-status success';
-                return true;
-            } catch (err) {
-                console.error('Camera error:', err);
-                statusDiv.innerHTML = '❌ Не удалось получить доступ к камере! Проверь разрешения.';
-                statusDiv.className = 'ai-status error';
-                return false;
-            }
-        }
-        
-        // Функция загрузки модели
-        async function loadModel() {
-            try {
-                statusDiv.innerHTML = '<span class="ai-loading"></span> Загрузка ИИ модели...';
-                statusDiv.className = 'ai-status loading';
-                model = await cocoSsd.load();
-                statusDiv.innerHTML = '✅ Модель загружена! Камера готова.';
-                statusDiv.className = 'ai-status success';
-                return true;
-            } catch (err) {
-                console.error('Model load error:', err);
-                statusDiv.innerHTML = '❌ Ошибка загрузки ИИ модели!';
-                statusDiv.className = 'ai-status error';
-                return false;
-            }
-        }
-        
-        // Функция распознавания
-        async function detectPhone() {
-            if (isProcessing) {
-                statusDiv.innerHTML = '⏳ Обработка... Подожди секунду';
-                return;
-            }
+        // Инициализация камеры и модели
+        setTimeout(async () => {
+            const video = document.getElementById('aiVideo');
+            const canvas = document.getElementById('aiCanvas');
+            const captureBtn = document.getElementById('aiCaptureBtn');
+            const statusDiv = document.getElementById('aiStatus');
+            const resultDiv = document.getElementById('aiDetectionResult');
             
-            if (!model) {
-                statusDiv.innerHTML = '❌ Модель ещё не загружена!';
-                return;
-            }
+            let model = null;
+            let stream = null;
+            let isProcessing = false;
             
-            if (!video.videoWidth || !video.videoHeight) {
-                statusDiv.innerHTML = '❌ Камера не готова!';
-                return;
-            }
+            const phoneClasses = ['cell phone', 'smartphone', 'mobile phone', 'phone'];
             
-            isProcessing = true;
-            captureBtn.disabled = true;
-            statusDiv.innerHTML = '<span class="ai-loading"></span> Анализ изображения...';
-            statusDiv.className = 'ai-status loading';
-            
-            try {
-                // Рисуем текущий кадр на canvas
-                canvas.width = video.videoWidth;
-                canvas.height = video.videoHeight;
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                
-                // Распознаём объекты
-                const predictions = await model.detect(canvas);
-                
-                // Ищем телефон
-                let foundPhone = false;
-                let detectedObjects = [];
-                
-                for (let pred of predictions) {
-                    const className = pred.class.toLowerCase();
-                    detectedObjects.push(className);
-                    
-                    // Проверяем, является ли объект телефоном
-                    for (let phoneClass of phoneClasses) {
-                        if (className.includes(phoneClass) || phoneClass.includes(className)) {
-                            foundPhone = true;
-                            break;
-                        }
-                    }
-                    
-                    if (foundPhone) break;
-                }
-                
-                if (foundPhone) {
-                    resultDiv.innerHTML = `✅ РАСПОЗНАНО: Телефон! (${predictions.filter(p => p.class.toLowerCase().includes('phone')).map(p => p.class).join(', ') || 'смартфон'})`;
-                    statusDiv.innerHTML = '✅ ТЕЛЕФОН ОБНАРУЖЕН! Доступ разрешён!';
+            async function initCamera() {
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ 
+                        video: { 
+                            facingMode: 'environment',
+                            width: { ideal: 640 },
+                            height: { ideal: 480 }
+                        } 
+                    });
+                    video.srcObject = stream;
+                    await video.play();
+                    statusDiv.innerHTML = '✅ Камера готова! Наведи на телефон и нажми "РАСПОЗНАТЬ"';
                     statusDiv.className = 'ai-status success';
-                    
-                    // Эффект успеха
-                    captureBtn.style.background = '#2eff7a';
-                    captureBtn.style.color = '#000';
-                    
-                    // Звук успеха
-                    try {
-                        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                        const osc = audioCtx.createOscillator();
-                        const gain = audioCtx.createGain();
-                        osc.connect(gain);
-                        gain.connect(audioCtx.destination);
-                        osc.frequency.value = 880;
-                        gain.gain.value = 0.2;
-                        osc.start();
-                        gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
-                        osc.stop(audioCtx.currentTime + 0.3);
-                    } catch(e) {}
-                    
-                    // Вибрация (если доступна)
-                    if (navigator.vibrate) navigator.vibrate(200);
-                    
-                    showMessage(q.successMsg);
-                    setTimeout(() => {
-                        currentIndex++;
-                        renderCurrent();
-                    }, 1500);
-                    
-                } else {
-                    resultDiv.innerHTML = `❌ Телефон не найден. Обнаружено: ${detectedObjects.length > 0 ? detectedObjects.join(', ') : 'ничего'}. Попробуй ещё раз!`;
-                    statusDiv.innerHTML = '❌ Телефон не распознан! Наведи камеру чётче.';
+                    return true;
+                } catch (err) {
+                    console.error('Camera error:', err);
+                    statusDiv.innerHTML = '❌ Не удалось получить доступ к камере! Проверь разрешения.';
                     statusDiv.className = 'ai-status error';
-                    captureBtn.disabled = false;
+                    return false;
+                }
+            }
+            
+            async function loadModel() {
+                try {
+                    statusDiv.innerHTML = '<span class="ai-loading"></span> Загрузка...';
+                    statusDiv.className = 'ai-status loading';
+                    model = await cocoSsd.load();
+                    statusDiv.innerHTML = '✅ Камера готова.';
+                    statusDiv.className = 'ai-status success';
+                    return true;
+                } catch (err) {
+                    console.error('Model load error:', err);
+                    statusDiv.innerHTML = '❌ Ошибка загрузки ИИ модели!';
+                    statusDiv.className = 'ai-status error';
+                    return false;
+                }
+            }
+            
+            async function detectPhone() {
+                if (isProcessing) {
+                    statusDiv.innerHTML = '⏳ Обработка... Подожди секунду';
+                    return;
+                }
+                
+                if (!model) {
+                    statusDiv.innerHTML = '❌ Модель ещё не загружена!';
+                    return;
+                }
+                
+                if (!video.videoWidth || !video.videoHeight) {
+                    statusDiv.innerHTML = '❌ Камера не готова!';
+                    return;
+                }
+                
+                isProcessing = true;
+                captureBtn.disabled = true;
+                statusDiv.innerHTML = '<span class="ai-loading"></span> Анализ изображения...';
+                statusDiv.className = 'ai-status loading';
+                
+                try {
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
                     
-                    // Эффект ошибки
-                    captureBtn.style.animation = 'shake 0.3s ease';
-                    setTimeout(() => captureBtn.style.animation = '', 300);
-                }
-                
-            } catch (err) {
-                console.error('Detection error:', err);
-                statusDiv.innerHTML = '❌ Ошибка распознавания! Попробуй ещё раз.';
-                statusDiv.className = 'ai-status error';
-                captureBtn.disabled = false;
-            } finally {
-                isProcessing = false;
-                if (!foundPhone) {
-                    captureBtn.disabled = false;
-                    captureBtn.style.background = '';
-                }
-            }
-        }
-        
-        // Инициализация
-        const cameraReady = await initCamera();
-        if (cameraReady) {
-            await loadModel();
-        }
-        
-        captureBtn.onclick = detectPhone;
-        
-        // Очистка при выходе
-        const cleanup = () => {
-            if (stream) {
-                stream.getTracks().forEach(track => track.stop());
-            }
-        };
-        
-        // Сохраняем cleanup для очистки
-        window.aiCameraCleanup = cleanup;
-        
-    }, 100);
-}
-            // Hash cracking
-            else if (q.type === "hash") {
-                html += `<div class="hash-container">
-                            <div class="code-display">📦 HASH: ${q.hashValue}</div>
-                            <div class="input-group">
-                                <input type="text" id="hashInput" class="terminal-input" placeholder="ВВЕДИ РАСШИФРОВАННЫЙ ПАРОЛЬ..." autocomplete="off">
-                                <button id="hashSubmitBtn" class="submit-btn">[ CRACK ]</button>
-                            </div>
-                            <div class="hint-text">💡 ${q.hint}</div>
-                         </div>`;
-            }
-            // Binary decoder
-            else if (q.type === "binary") {
-                html += `<div class="binary-container">
-                            <div class="code-display">🔢 BINARY: ${q.binaryValue}</div>
-                            <div class="input-group">
-                                <input type="text" id="binaryInput" class="terminal-input" placeholder="ДЕКОДИРОВАННЫЙ ТЕКСТ..." autocomplete="off">
-                                <button id="binarySubmitBtn" class="submit-btn">[ DECODE ]</button>
-                            </div>
-                            <div class="hint-text">💡 ${q.hint}</div>
-                         </div>`;
-            }
-            // Regex challenge
-            else if (q.type === "regex") {
-                html += `<div class="regex-container">
-                            <div class="code-display">📝 TEXT: "${q.sampleText}"</div>
-                            <div class="input-group">
-                                <input type="text" id="regexInput" class="terminal-input" placeholder="ВВЕДИ REGEX..." autocomplete="off">
-                                <button id="regexSubmitBtn" class="submit-btn">[ SEARCH ]</button>
-                            </div>
-                            <div class="hint-text">💡 ${q.hint}</div>
-                         </div>`;
-            }
-            // Debug code
-            else if (q.type === "debug") {
-                html += `<div class="code-container">
-                            <div class="code-display"><pre style="margin:0; font-family:monospace;">${q.buggyCode}</pre></div>
-                            <div class="input-group">
-                                <input type="text" id="debugInput" class="terminal-input" placeholder="ЧТО НУЖНО ИСПРАВИТЬ?" autocomplete="off">
-                                <button id="debugSubmitBtn" class="submit-btn">[ FIX ]</button>
-                            </div>
-                            <div class="hint-text">💡 ${q.hint}</div>
-                         </div>`;
-            }
-            // Bruteforce PIN
-            else if (q.type === "bruteforce") {
-                html += `<div class="code-container">
-                            <ul class="clues-list">${q.clues.map(c => `<li>🔍 ${c}</li>`).join('')}</ul>
-                            <div class="input-group">
-                                <input type="text" id="pinInput" class="terminal-input" placeholder="ВВЕДИ 4-ЗНАЧНЫЙ PIN..." autocomplete="off" maxlength="4">
-                                <button id="pinSubmitBtn" class="submit-btn">[ UNLOCK ]</button>
-                            </div>
-                            <div class="hint-text">💡 Собери код из подсказок</div>
-                         </div>`;
-            }
-            // Command recovery
-            else if (q.type === "command") {
-                html += `<div class="code-container">
-                            <div class="input-group">
-                                <input type="text" id="commandInput" class="terminal-input" placeholder="ВВЕДИ GIT КОМАНДУ..." autocomplete="off">
-                                <button id="commandSubmitBtn" class="submit-btn">[ EXECUTE ]</button>
-                            </div>
-                            <div class="hint-text">💡 ${q.hint}</div>
-                         </div>`;
-            }
-            // Choice type
-            else if (q.type === "choice") {
-                html += `<div class="answers" id="answersContainer"></div>`;
-            }
-            // QR вопрос (с текстовым полем)
-else if (q.type === "qr") {
-    html += `
-        <div class="media-container hacker-qr">
-            <img src="${q.mediaUrl}" alt="QR Code" class="qr-image">
-            ${q.mediaCaption ? `<div class="media-caption hacker-caption">${q.mediaCaption}</div>` : ''}
-        </div>
-        <div class="input-group">
-            <input type="text" id="qrInput" class="terminal-input" placeholder="ВВЕДИ ТЕКСТ..." autocomplete="off">
-            <button id="qrSubmitBtn" class="submit-btn">ОТПРАВИТЬ</button>
-        </div>
-        <div class="hint-text">💡 ${q.hint}</div>
-    `;
-}
-            // Input type
-            else if (q.type === "input") {
-                const inputField = document.getElementById('userInput');
-                const submitBtn = document.getElementById('submitBtn');
-                if (submitBtn) {
-                    submitBtn.onclick = () => {
-                        const userAnswer = inputField.value.trim().toLowerCase();
-                        let matched = q.expectedKeywords.some(kw => userAnswer.includes(kw.toLowerCase()));
-                        if (matched) {
-                            showMessage(q.successMsg);
-                            currentIndex++;
-                            renderCurrent();
-                        } else {
-                            showFullscreenError(q.errorMeme);
-                        }
-                    };
-                }
-            }
-            
-            html += `</div>`;
-            appDiv.innerHTML = html;
-            
-            // Анимация печатания вопроса
-            const questionElement = document.getElementById('questionText');
-            await typeText(questionElement, `> ${q.text}`, 25);
-            
-            const cursor = document.createElement('span');
-            cursor.className = 'typing-cursor';
-            questionElement.appendChild(cursor);
-            
-            // Медиа глитч
-            if (q.type === "media") {
-                const mediaElement = document.getElementById('mediaElement');
-                if (mediaElement) {
-                    mediaGlitchInterval = setInterval(() => {
-                        if (mediaElement && document.body.contains(mediaElement)) {
-                            mediaElement.classList.add('glitch-effect');
-                            setTimeout(() => mediaElement.classList.remove('glitch-effect'), 200);
-                        }
-                    }, 3000);
-                }
-            }
-            
-            // Привязка обработчиков для ВСЕХ типов
-            
-            // SQL
-            if (q.type === "sql") {
-                const sqlInput = document.getElementById('sqlInput');
-                const sqlSubmit = document.getElementById('sqlSubmitBtn');
-                const sqlPreview = document.getElementById('sqlPreview');
-                if (sqlInput && sqlPreview) sqlInput.oninput = () => { sqlPreview.textContent = sqlInput.value; };
-                if (sqlSubmit) sqlSubmit.onclick = () => handleSQLAnswer(sqlInput.value, q);
-                if (sqlInput) sqlInput.onkeypress = (e) => { if(e.key === 'Enter') handleSQLAnswer(sqlInput.value, q); };
-            }
-            // Аудио вопрос обработчик
-else if (q.type === "audio") {
-    const audioInput = document.getElementById('audioInput');
-    const audioSubmit = document.getElementById('audioSubmitBtn');
-    
-    function checkAudioAnswer() {
-        const userAnswer = audioInput.value.trim();
-        // Сравниваем без учета регистра
-        if (userAnswer.toLowerCase() === q.expectedInput.toLowerCase()) {
-            showMessage(q.successMsg);
-            currentIndex++;
-            renderCurrent();
-        } else {
-            showFullscreenError(q.errorMeme);
-        }
-    }
-    
-    if (audioSubmit) {
-        audioSubmit.onclick = checkAudioAnswer;
-    }
-    
-    if (audioInput) {
-        audioInput.onkeypress = (e) => {
-            if (e.key === 'Enter') {
-                checkAudioAnswer();
-            }
-        };
-    }
-}
-            // QR вопрос обработчик (с игнорированием регистра)
-            else if (q.type === "qr") {
-                const qrInput = document.getElementById('qrInput');
-                const qrSubmit = document.getElementById('qrSubmitBtn');
-                
-                if (qrSubmit) {
-                    qrSubmit.onclick = () => {
-                        const userAnswer = qrInput.value.trim();
-                        // Сравниваем без учета регистра
-                        if (userAnswer.toLowerCase() === q.expectedInput.toLowerCase()) {
-                            showMessage(q.successMsg);
-                            currentIndex++;
-                            renderCurrent();
-                        } else {
-                            showFullscreenError(q.errorMeme);
-                        }
-                    };
-                }
-                
-                if (qrInput) {
-                    qrInput.onkeypress = (e) => {
-                        if (e.key === 'Enter') {
-                            const userAnswer = qrInput.value.trim();
-                            // Сравниваем без учета регистра
-                            if (userAnswer.toLowerCase() === q.expectedInput.toLowerCase()) {
-                                showMessage(q.successMsg);
-                                currentIndex++;
-                                renderCurrent();
-                            } else {
-                                showFullscreenError(q.errorMeme);
+                    const predictions = await model.detect(canvas);
+                    
+                    let foundPhone = false;
+                    let detectedObjects = [];
+                    
+                    for (let pred of predictions) {
+                        const className = pred.class.toLowerCase();
+                        detectedObjects.push(className);
+                        
+                        for (let phoneClass of phoneClasses) {
+                            if (className.includes(phoneClass) || phoneClass.includes(className)) {
+                                foundPhone = true;
+                                break;
                             }
                         }
-                    };
-                }
-            }
-            else if (q.type === "hash") {
-                const hashInput = document.getElementById('hashInput');
-                const hashSubmit = document.getElementById('hashSubmitBtn');
-                if (hashSubmit) hashSubmit.onclick = () => handleHashAnswer(hashInput.value, q);
-                if (hashInput) hashInput.onkeypress = (e) => { if(e.key === 'Enter') handleHashAnswer(hashInput.value, q); };
-            }
-            // Binary
-            else if (q.type === "binary") {
-                const binaryInput = document.getElementById('binaryInput');
-                const binarySubmit = document.getElementById('binarySubmitBtn');
-                if (binarySubmit) binarySubmit.onclick = () => handleBinaryAnswer(binaryInput.value, q);
-                if (binaryInput) binaryInput.onkeypress = (e) => { if(e.key === 'Enter') handleBinaryAnswer(binaryInput.value, q); };
-            }
-            // Regex
-            else if (q.type === "regex") {
-                const regexInput = document.getElementById('regexInput');
-                const regexSubmit = document.getElementById('regexSubmitBtn');
-                if (regexSubmit) regexSubmit.onclick = () => handleRegexAnswer(regexInput.value, q);
-                if (regexInput) regexInput.onkeypress = (e) => { if(e.key === 'Enter') handleRegexAnswer(regexInput.value, q); };
-            }
-            // Debug
-            else if (q.type === "debug") {
-                const debugInput = document.getElementById('debugInput');
-                const debugSubmit = document.getElementById('debugSubmitBtn');
-                if (debugSubmit) debugSubmit.onclick = () => handleDebugAnswer(debugInput.value, q);
-                if (debugInput) debugInput.onkeypress = (e) => { if(e.key === 'Enter') handleDebugAnswer(debugInput.value, q); };
-            }
-            // Bruteforce
-            else if (q.type === "bruteforce") {
-                const pinInput = document.getElementById('pinInput');
-                const pinSubmit = document.getElementById('pinSubmitBtn');
-                if (pinSubmit) pinSubmit.onclick = () => handleBruteforceAnswer(pinInput.value, q);
-                if (pinInput) pinInput.onkeypress = (e) => { if(e.key === 'Enter') handleBruteforceAnswer(pinInput.value, q); };
-            }
-            // Command
-            else if (q.type === "command") {
-                const commandInput = document.getElementById('commandInput');
-                const commandSubmit = document.getElementById('commandSubmitBtn');
-                if (commandSubmit) commandSubmit.onclick = () => handleCommandAnswer(commandInput.value, q);
-                if (commandInput) commandInput.onkeypress = (e) => { if(e.key === 'Enter') handleCommandAnswer(commandInput.value, q); };
-            }
-            // Choice (включая media с answersContainer)
-            else if (q.type === "choice" || q.type === "media") {
-                const answersDiv = document.getElementById('answersContainer');
-                if (answersDiv) {
-                    await new Promise(resolve => setTimeout(resolve, 200));
-                    for (let opt of q.options) {
-                        const btn = document.createElement('button');
-                        btn.className = 'answer-btn';
-                        btn.textContent = `> ${opt}`;
-                        btn.onclick = () => handleChoiceAnswer(opt, q);
-                        answersDiv.appendChild(btn);
-                        await new Promise(resolve => setTimeout(resolve, 100));
+                        if (foundPhone) break;
+                    }
+                    
+                    if (foundPhone) {
+                        resultDiv.innerHTML = `✅ РАСПОЗНАНО: Телефон! (${predictions.filter(p => p.class.toLowerCase().includes('phone')).map(p => p.class).join(', ') || 'смартфон'})`;
+                        statusDiv.innerHTML = '✅ ТЕЛЕФОН ОБНАРУЖЕН! Доступ разрешён!';
+                        statusDiv.className = 'ai-status success';
+                        
+                        captureBtn.style.background = '#2eff7a';
+                        captureBtn.style.color = '#000';
+                        
+                        try {
+                            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                            const osc = audioCtx.createOscillator();
+                            const gain = audioCtx.createGain();
+                            osc.connect(gain);
+                            gain.connect(audioCtx.destination);
+                            osc.frequency.value = 880;
+                            gain.gain.value = 0.2;
+                            osc.start();
+                            gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.3);
+                            osc.stop(audioCtx.currentTime + 0.3);
+                        } catch(e) {}
+                        
+                        if (navigator.vibrate) navigator.vibrate(200);
+                        
+                        showMessage(q.successMsg);
+                        setTimeout(() => {
+                            currentIndex++;
+                            renderCurrent();
+                        }, 1500);
+                        
+                    } else {
+                        resultDiv.innerHTML = `❌ Телефон не найден. Обнаружено: ${detectedObjects.length > 0 ? detectedObjects.join(', ') : 'ничего'}. Попробуй ещё раз!`;
+                        statusDiv.innerHTML = '❌ Телефон не распознан! Наведи камеру чётче.';
+                        statusDiv.className = 'ai-status error';
+                        captureBtn.disabled = false;
+                        
+                        captureBtn.style.animation = 'shake 0.3s ease';
+                        setTimeout(() => captureBtn.style.animation = '', 300);
+                    }
+                    
+                } catch (err) {
+                    console.error('Detection error:', err);
+                    statusDiv.innerHTML = '❌ Ошибка распознавания! Попробуй ещё раз.';
+                    statusDiv.className = 'ai-status error';
+                    captureBtn.disabled = false;
+                } finally {
+                    isProcessing = false;
+                    if (!foundPhone) {
+                        captureBtn.disabled = false;
+                        captureBtn.style.background = '';
                     }
                 }
             }
-            // Input
-            else if (q.type === "input") {
-                const inputField = document.getElementById('userInput');
-                const submitBtn = document.getElementById('submitBtn');
-                if (submitBtn) submitBtn.onclick = () => handleInputAnswer(inputField.value.trim().toLowerCase(), q);
-                if (inputField) inputField.onkeypress = (e) => { if(e.key === 'Enter') handleInputAnswer(inputField.value.trim().toLowerCase(), q); };
+            
+            const cameraReady = await initCamera();
+            if (cameraReady) {
+                await loadModel();
+            }
+            
+            captureBtn.onclick = detectPhone;
+            
+            window.aiCameraCleanup = () => {
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                }
+            };
+            
+        }, 100);
+        
+        return;
+    }
+    
+    // ========== ДРУГИЕ ТИПЫ ВОПРОСОВ ==========
+    
+    // Медиа контент для media типа
+    else if (q.type === "media") {
+        html += `<div class="media-container" id="mediaContainer">`;
+        if (q.mediaType === "image") {
+            html += `<img src="${q.mediaUrl}" alt="memory" id="mediaElement" style="max-width:100%; max-height:200px; border-radius:8px;">`;
+        } else if (q.mediaType === "video") {
+            html += `<video controls id="mediaElement" style="max-width:100%; max-height:200px; border-radius:8px;">
+                        <source src="${q.mediaUrl}" type="video/mp4">
+                        Ваш браузер не поддерживает видео
+                     </video>`;
+        }
+        if (q.mediaCaption) html += `<div class="media-caption">📸 ${q.mediaCaption}</div>`;
+        html += `</div>`;
+        html += `<div class="answers" id="answersContainer"></div>`;
+    }
+    // SQL Injection
+    else if (q.type === "sql") {
+        html += `<div class="sql-container">
+                    <div class="sql-query">${q.sqlTemplate}<span class="sql-input-span" id="sqlPreview">________</span>${q.sqlSuffix}</div>
+                    <div class="input-group">
+                        <input type="text" id="sqlInput" class="terminal-input" placeholder="ВСТАВЬ СВОЙ КОД..." autocomplete="off">
+                        <button id="sqlSubmitBtn" class="submit-btn">[ EXECUTE ]</button>
+                    </div>
+                    <div class="hint-text">💡 ${q.hint}</div>
+                 </div>`;
+    }
+    // Bruteforce PIN
+    else if (q.type === "bruteforce") {
+        html += `<div class="code-container">
+                    <ul class="clues-list">${q.clues.map(c => `<li>🔍 ${c}</li>`).join('')}</ul>
+                    <div class="input-group">
+                        <input type="text" id="pinInput" class="terminal-input" placeholder="ВВЕДИ 4-ЗНАЧНЫЙ PIN..." autocomplete="off" maxlength="4">
+                        <button id="pinSubmitBtn" class="submit-btn">ОТПРАВИТЬ</button>
+                    </div>
+                    <div class="hint-text">💡 Собери код из подсказок</div>
+                 </div>`;
+    }
+    // Choice type
+    else if (q.type === "choice") {
+        html += `<div class="answers" id="answersContainer"></div>`;
+    }
+    // QR вопрос
+    else if (q.type === "qr") {
+        html += `
+            <div class="media-container hacker-qr">
+                <img src="${q.mediaUrl}" alt="QR Code" class="qr-image">
+                ${q.mediaCaption ? `<div class="media-caption hacker-caption">${q.mediaCaption}</div>` : ''}
+            </div>
+            <div class="input-group">
+                <input type="text" id="qrInput" class="terminal-input" placeholder="ВВЕДИ ТЕКСТ..." autocomplete="off">
+                <button id="qrSubmitBtn" class="submit-btn">ОТПРАВИТЬ</button>
+            </div>
+            <div class="hint-text">💡 ${q.hint}</div>
+        `;
+    }
+    // Input type
+    else if (q.type === "input") {
+        // Обработка будет добавлена позже
+    }
+    
+    // Для НЕ аудио и НЕ AI Vision вопросов закрываем и вставляем HTML
+    html += `</div>`;
+    appDiv.innerHTML = html;
+    
+    // Анимация печатания вопроса
+    const questionElement = document.getElementById('questionText');
+    await typeText(questionElement, `> ${q.text}`, 25);
+    
+    const cursor = document.createElement('span');
+    cursor.className = 'typing-cursor';
+    questionElement.appendChild(cursor);
+    
+    // ========== ПРИВЯЗКА ОБРАБОТЧИКОВ ДЛЯ ДРУГИХ ТИПОВ ==========
+    
+    // Choice обработчик
+    if (q.type === "choice") {
+        const answersDiv = document.getElementById('answersContainer');
+        if (answersDiv) {
+            for (let opt of q.options) {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.textContent = `> ${opt}`;
+                btn.onclick = () => handleChoiceAnswer(opt, q);
+                answersDiv.appendChild(btn);
             }
         }
+    }
+    // QR обработчик
+    else if (q.type === "qr") {
+        const qrInput = document.getElementById('qrInput');
+        const qrSubmit = document.getElementById('qrSubmitBtn');
+        
+        const checkQR = () => {
+            const userAnswer = qrInput.value.trim().toLowerCase();
+            if (userAnswer === q.expectedInput.toLowerCase()) {
+                showMessage(q.successMsg);
+                currentIndex++;
+                renderCurrent();
+            } else {
+                showFullscreenError(q.errorMeme);
+            }
+        };
+        
+        if (qrSubmit) qrSubmit.onclick = checkQR;
+        if (qrInput) qrInput.onkeypress = (e) => {
+            if (e.key === 'Enter') checkQR();
+        };
+    }
+    // Bruteforce обработчик
+    else if (q.type === "bruteforce") {
+        const pinInput = document.getElementById('pinInput');
+        const pinSubmit = document.getElementById('pinSubmitBtn');
+        if (pinSubmit) pinSubmit.onclick = () => handleBruteforceAnswer(pinInput.value, q);
+        if (pinInput) pinInput.onkeypress = (e) => {
+            if (e.key === 'Enter') handleBruteforceAnswer(pinInput.value, q);
+        };
+    }
+    // SQL обработчик
+    else if (q.type === "sql") {
+        const sqlInput = document.getElementById('sqlInput');
+        const sqlSubmit = document.getElementById('sqlSubmitBtn');
+        const sqlPreview = document.getElementById('sqlPreview');
+        if (sqlInput && sqlPreview) sqlInput.oninput = () => { sqlPreview.textContent = sqlInput.value; };
+        if (sqlSubmit) sqlSubmit.onclick = () => handleSQLAnswer(sqlInput.value, q);
+        if (sqlInput) sqlInput.onkeypress = (e) => { if(e.key === 'Enter') handleSQLAnswer(sqlInput.value, q); };
+    }
+    // Media обработчик
+    else if (q.type === "media") {
+        const answersDiv = document.getElementById('answersContainer');
+        if (answersDiv) {
+            for (let opt of q.options) {
+                const btn = document.createElement('button');
+                btn.className = 'answer-btn';
+                btn.textContent = `> ${opt}`;
+                btn.onclick = () => handleChoiceAnswer(opt, q);
+                answersDiv.appendChild(btn);
+            }
+        }
+        
+        const mediaElement = document.getElementById('mediaElement');
+        if (mediaElement) {
+            mediaGlitchInterval = setInterval(() => {
+                if (mediaElement && document.body.contains(mediaElement)) {
+                    mediaElement.classList.add('glitch-effect');
+                    setTimeout(() => mediaElement.classList.remove('glitch-effect'), 200);
+                }
+            }, 3000);
+        }
+    }
+}
         
         
         async function startQuest() {
@@ -1600,6 +1440,10 @@ else if (q.type === "audio") {
     // Показываем анимацию инициализации
     await showQuestInitialization();
     
+   setTimeout(() => {
+        startHackerBackground();
+    }, 100);
+
     // После завершения инициализации — плавно показываем квест
     requestAnimationFrame(() => {
         quizContainer.classList.add('visible');
@@ -2212,8 +2056,130 @@ function playVirusSound() {
     }
 }
 
+// Функция создания одной вирусной картинки
+function createVirusImage(isSpam = false) {
+    const img = document.createElement('img');
+    const randomImage = VIRUS_IMAGES[Math.floor(Math.random() * VIRUS_IMAGES.length)];
+    img.src = randomImage;
+    img.className = 'virus-popup';
+    
+    const isMobile = isMobileDevice();
+    
+    let size;
+    if (isSpam) {
+        if (isMobile) {
+            size = Math.random() * 100 + 80;
+        } else {
+            size = Math.random() * 200 + 180;
+        }
+    } else {
+        if (isMobile) {
+            size = Math.random() * 100 + 80;
+        } else {
+            size = Math.random() * 80 + 70;
+        }
+    }
+    
+    const maxSize = Math.min(window.innerWidth, window.innerHeight) * 0.7;
+    size = Math.min(size, maxSize);
+    
+    function isPositionBlocked(x, y, width, height) {
+        const elementsToAvoid = [
+            '.birthday-card',
+            '.birthday-card button',
+            '.birthday-card h1',
+            '.birthday-card h2',
+            '.birthday-card p'
+        ];
+        
+        for (let selector of elementsToAvoid) {
+            const element = document.querySelector(selector);
+            if (element) {
+                const rect = element.getBoundingClientRect();
+                const padding = 20;
+                
+                if (x + width > rect.left - padding &&
+                    x < rect.right + padding &&
+                    y + height > rect.top - padding &&
+                    y < rect.bottom + padding) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    let x, y;
+    let attempts = 0;
+    const maxAttempts = 30;
+    
+    if (!isSpam) {
+        do {
+            x = Math.random() * (window.innerWidth - size);
+            y = Math.random() * (window.innerHeight - size);
+            attempts++;
+            
+            if (!isPositionBlocked(x, y, size, size)) {
+                break;
+            }
+            
+            if (attempts > maxAttempts) {
+                const corners = [
+                    [10, 10],
+                    [window.innerWidth - size - 10, 10],
+                    [10, window.innerHeight - size - 10],
+                    [window.innerWidth - size - 10, window.innerHeight - size - 10]
+                ];
+                const randomCorner = corners[Math.floor(Math.random() * corners.length)];
+                x = randomCorner[0];
+                y = randomCorner[1];
+                break;
+            }
+        } while (true);
+    } else {
+        x = Math.random() * (window.innerWidth - size);
+        y = Math.random() * (window.innerHeight - size);
+    }
+    
+    img.style.left = `${Math.max(0, Math.min(x, window.innerWidth - size))}px`;
+    img.style.top = `${Math.max(0, Math.min(y, window.innerHeight - size))}px`;
+    img.style.width = `${size}px`;
+    img.style.height = `${size}px`;
+    
+    const tilt = (Math.random() - 0.5) * 15;
+    img.style.transform = `rotate(${tilt}deg)`;
+    
+    document.body.appendChild(img);
+    
+    // 🔥 ВОСПРОИЗВОДИМ ЗВУК БЕЗ ЗАДЕРЖКИ
+    if (isSpam) {
+        playVirusSound();
+    }
+    
+    if (!isSpam) {
+        setTimeout(() => {
+            if (img && img.remove) img.remove();
+        }, 4000);
+    }
+}
 
-
+// Функция спама картинками
+function startImageSpamWithSound() {
+    if (spamInterval) return;
+    
+    // Активируем аудио при первом спаме
+    initAudio();
+    
+    // Удаляем старые картинки
+    const oldImages = document.querySelectorAll('.virus-popup');
+    oldImages.forEach(img => img.remove());
+    
+    spamInterval = setInterval(() => {
+        createVirusImage(true);
+        
+        if (navigator.vibrate) navigator.vibrate(30);
+    }, 80);
+}
 
 // Инициализация аудио при первом взаимодействии пользователя
 function initAudioOnFirstClick() {
@@ -2396,7 +2362,7 @@ document.getElementById('uraBtn').onclick = async () => {
             // ========== ЭКРАН ВЗЛОМА ==========
             const brokenDiv = document.createElement('div');
             brokenDiv.className = 'broken-effect';
-            brokenDiv.innerHTML = `<div class="broken-text">⚠️SYSTEM CRASH⚠️<br>ERROR 0xFFFFFFFF<br><span style="font-size:24px;">ТЫ СЛОМАЛ САЙТ...</span><br><span style="font-size:18px;color:#ff6666;">УСТАНОВЛЕН ЗАПРЕТ</span></div>`;
+            brokenDiv.innerHTML = `<div class="broken-text">⚠️SYSTEM CRASH⚠️<br>ERROR 0xFFFFFFFF<br><span style="font-size:24px;">⚠️ОШИБКА⚠️</span><br><span style="font-size:18px;color:#ff6666;">УСТАНОВЛЕН ЗАПРЕТ</span></div>`;
             document.body.appendChild(brokenDiv);
 
             playSirenSound();
@@ -2717,272 +2683,94 @@ birthdayPage.classList.add = function(className) {
     return originalFadeOut.call(birthdayPage.classList, className);
 };
 
-// ========== ФУНКЦИИ ДЛЯ ЗАДАНИЯ С ТРЯСКОЙ ==========
-let shakeListener = null;
-let shakeCount = 0;
-let currentCode = [0, 0, 0, 0];
-let isShakeTaskActive = false;
-let lastShakeTime = 0;
 
-// Функция для генерации случайного числа
-function getRandomDigit() {
-    return Math.floor(Math.random() * 10);
-}
 
-// Функция обновления отображения кода
-function updateCodeDisplay() {
-    const codeDisplay = document.getElementById('shakeCodeDisplay');
-    if (codeDisplay) {
-        codeDisplay.innerHTML = currentCode.join(' ');
-        codeDisplay.style.animation = 'codePulse 0.3s ease';
-        setTimeout(() => {
-            if (codeDisplay) codeDisplay.style.animation = '';
-        }, 300);
+// ========== ФИКС: ГАРАНТИРОВАННЫЙ ЗАПУСК ХАКЕРСКОГО ФОНА ==========
+let hackerBackgroundActive = false;
+
+function ensureHackerBackground() {
+    // Если фон уже запущен и активен — не трогаем
+    if (hackerBackgroundActive && window.hackerIntervals && window.hackerIntervals.length > 0) {
+        return;
     }
+    
+    // Останавливаем старый фон, если есть
+    stopHackerBackground();
+    
+    // Запускаем заново
+    startHackerBackground();
+    hackerBackgroundActive = true;
+    
+    console.log('[HACKER] Фон активирован');
 }
 
-// Функция обработки тряски
-function handleShake() {
-    if (!isShakeTaskActive) return;
+// Переопределяем renderCurrent, чтобы фон перезапускался при каждом вопросе
+const originalRenderCurrent = renderCurrent;
+renderCurrent = async function() {
+    // Убеждаемся, что фон активен
+    if (quizContainer.style.display !== 'none') {
+        ensureHackerBackground();
+    }
     
-    const now = Date.now();
-    if (now - lastShakeTime < 500) return;
-    lastShakeTime = now;
+    // Вызываем оригинальную функцию
+    await originalRenderCurrent();
+};
+
+// Переопределяем showFullscreenError, чтобы после перезапуска фон включался
+const originalShowFullscreenError = showFullscreenError;
+showFullscreenError = function(errorMsg) {
+    // Останавливаем фон (оригинальная логика)
+    stopHackerBackground();
+    hackerBackgroundActive = false;
     
-    shakeCount++;
+    // Вызываем оригинальную функцию
+    originalShowFullscreenError(errorMsg);
     
-    if (navigator.vibrate) navigator.vibrate(100);
-    playShakeSound();
-    
-    if (shakeCount < 5) {
-        const randomPos = Math.floor(Math.random() * 4);
-        currentCode[randomPos] = getRandomDigit();
-        updateCodeDisplay();
-        showShakeProgress();
-        
-        const container = document.querySelector('.shake-container');
-        if (container) {
-            container.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                if (container) container.style.transform = 'scale(1)';
-            }, 150);
+    // После перезапуска квеста фон включится через startQuest()
+};
+
+// Исправляем startQuest — добавляем активацию фона после инициализации
+const originalStartQuest = startQuest;
+startQuest = async function() {
+    hackerBackgroundActive = false;
+    await originalStartQuest();
+    // После запуска квеста убеждаемся, что фон активен
+    setTimeout(() => {
+        if (quizContainer.style.display !== 'none') {
+            ensureHackerBackground();
         }
-        
-    } else if (shakeCount === 5) {
-        currentCode = [2, 0, 0, 3];
-        updateCodeDisplay();
-        
-        const statusDiv = document.getElementById('shakeStatus');
-        if (statusDiv) {
-            statusDiv.innerHTML = '✅ КОД ВОССТАНОВЛЕН! ДОСТУП РАЗРЕШЁН!';
-            statusDiv.style.color = '#2eff7a';
-        }
-        
-        isShakeTaskActive = false;
-        
+    }, 500);
+};
+
+// Добавляем проверку при каждом переходе между вопросами
+// В renderCurrent уже добавили, но нужно также в обработчиках ответов
+function patchAnswerHandlers() {
+    // Перехватываем переход к следующему вопросу
+    const originalShowMessage = showMessage;
+    window.showMessage = function(msg) {
+        originalShowMessage(msg);
+        // После успешного ответа проверяем фон
         setTimeout(() => {
-            showMessage(questions[currentIndex].successMsg);
-            currentIndex++;
-            renderCurrent();
-        }, 1500);
-    }
-}
-
-// Функция отображения прогресса
-function showShakeProgress() {
-    const progressDiv = document.getElementById('shakeProgress');
-    if (progressDiv) {
-        const percent = (shakeCount / 5) * 100;
-        progressDiv.style.width = `${percent}%`;
-        progressDiv.textContent = `${Math.floor(percent)}%`;
-    }
-    const countDiv = document.getElementById('shakeCount');
-    if (countDiv) {
-        countDiv.textContent = `${shakeCount}/5`;
-    }
-}
-
-// Звук тряски
-function playShakeSound() {
-    try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.type = 'square';
-        osc.frequency.value = 600;
-        gain.gain.value = 0.1;
-        osc.start();
-        gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.08);
-        osc.stop(audioCtx.currentTime + 0.08);
-    } catch(e) {}
-}
-
-// Запуск детектора тряски
-function startShakeDetection() {
-    if (shakeListener) return;
-    
-    let lastX = null, lastY = null, lastZ = null;
-    const SHAKE_THRESHOLD = 15;
-    
-    shakeListener = (event) => {
-        if (!isShakeTaskActive) return;
-        
-        const acceleration = event.accelerationIncludingGravity;
-        if (!acceleration) return;
-        
-        const x = acceleration.x;
-        const y = acceleration.y;
-        const z = acceleration.z;
-        
-        if (lastX !== null) {
-            const deltaX = Math.abs(x - lastX);
-            const deltaY = Math.abs(y - lastY);
-            const deltaZ = Math.abs(z - lastZ);
-            const delta = deltaX + deltaY + deltaZ;
-            
-            if (delta > SHAKE_THRESHOLD) {
-                handleShake();
+            if (quizContainer.style.display !== 'none') {
+                ensureHackerBackground();
             }
-        }
-        
-        lastX = x;
-        lastY = y;
-        lastZ = z;
+        }, 100);
     };
-    
-    window.addEventListener('devicemotion', shakeListener);
-    
-    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-        DeviceMotionEvent.requestPermission().catch(console.log);
-    }
 }
 
-// Остановка детектора тряски
-function stopShakeDetection() {
-    if (shakeListener) {
-        window.removeEventListener('devicemotion', shakeListener);
-        shakeListener = null;
-    }
-}
+// Вызываем патч
+patchAnswerHandlers();
 
-// Функция рендеринга задания с тряской
-async function renderShakeTask(q) {
-    isShakeTaskActive = true;
-    shakeCount = 0;
-    currentCode = [0, 0, 0, 0];
-    
-    const html = `
-        <div class="shake-container">
-            <div class="shake-code-box">
-                <div class="shake-code-title">🔐 КОД ДОСТУПА 🔐</div>
-                <div class="shake-code-display" id="shakeCodeDisplay">
-                    0 0 0 0
-                </div>
-                <div class="shake-info">
-                    <div class="shake-progress-container">
-                        <div class="shake-progress-bar" id="shakeProgress">0%</div>
-                    </div>
-                </div>
-                <div class="shake-status" id="shakeStatus">
-                    ⚡ ПОТРЯСИ ТЕЛЕФОН, ЧТОБЫ АКТИВИРОВАТЬ ДЕКОДЕР ⚡
-                </div>
-                <div class="shake-hint">
-                    💡 ${q.hint}
-                </div>
-            </div>
-        </div>
-    `;
-    
-    appDiv.innerHTML += html;
-    
-    startShakeDetection();
-    
-    // Добавляем стили если их нет
-    if (!document.querySelector('#shakeStyles')) {
-        const style = document.createElement('style');
-        style.id = 'shakeStyles';
-        style.textContent = `
-            @keyframes codePulse {
-                0% { transform: scale(1); text-shadow: 0 0 0 #2eff7a; }
-                50% { transform: scale(1.1); text-shadow: 0 0 20px #2eff7a; }
-                100% { transform: scale(1); text-shadow: 0 0 0 #2eff7a; }
-            }
-            .shake-container {
-                background: #0a0f0c;
-                border: 2px solid #ff3366;
-                border-radius: 16px;
-                padding: 20px;
-                margin: 15px 0;
-                text-align: center;
-                animation: borderPulse 1s infinite;
-            }
-            .shake-code-box {
-                background: #030605;
-                border-radius: 12px;
-                padding: 20px;
-            }
-            .shake-code-title {
-                color: #ff3366;
-                font-size: 14px;
-                margin-bottom: 15px;
-                letter-spacing: 2px;
-            }
-            .shake-code-display {
-                font-size: 48px;
-                font-weight: bold;
-                font-family: monospace;
-                color: #2eff7a;
-                background: #000;
-                padding: 20px;
-                border-radius: 12px;
-                letter-spacing: 20px;
-                margin-bottom: 20px;
-                text-shadow: 0 0 10px #2eff7a;
-            }
-            .shake-counter {
-                color: #88ffaa;
-                font-size: 18px;
-                margin-bottom: 15px;
-            }
-            .shake-progress-container {
-                background: #1a1f1c;
-                border-radius: 30px;
-                height: 30px;
-                margin: 15px 0;
-                overflow: hidden;
-            }
-            .shake-progress-bar {
-                background: linear-gradient(90deg, #ff3366, #2eff7a);
-                width: 0%;
-                height: 100%;
-                line-height: 30px;
-                color: white;
-                font-size: 12px;
-                text-align: center;
-                transition: width 0.3s ease;
-            }
-            .shake-status {
-                color: #ffaa66;
-                font-size: 14px;
-                margin: 15px 0;
-                padding: 10px;
-                background: rgba(255, 51, 102, 0.1);
-                border-radius: 8px;
-            }
-            .shake-hint {
-                color: #88ffaa;
-                font-size: 12px;
-                margin-top: 15px;
-                padding-top: 10px;
-                border-top: 1px solid #ff3366;
-            }
-            @keyframes borderPulse {
-                0%, 100% { border-color: #ff3366; box-shadow: 0 0 10px rgba(255, 51, 102, 0.3); }
-                50% { border-color: #ff6699; box-shadow: 0 0 25px rgba(255, 51, 102, 0.8); }
-            }
-        `;
-        document.head.appendChild(style);
-    }
-}
+// Также исправляем showCaptcha — после её прохождения фон должен включиться
+const originalShowCaptcha = showCaptcha;
+window.showCaptcha = async function() {
+    hackerBackgroundActive = false;
+    stopHackerBackground();
+    const result = await originalShowCaptcha();
+    setTimeout(() => {
+        if (quizContainer.style.display !== 'none') {
+            ensureHackerBackground();
+        }
+    }, 200);
+    return result;
+};
