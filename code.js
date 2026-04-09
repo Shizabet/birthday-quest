@@ -64,7 +64,7 @@ const questions = [
             "Третья цифра — предпоследняя цифра в номере @vadimka_O9",
             "Последняя цифра — пятая цифра в номере @evil_symphony)"
         ],
-        expected: "5851",
+        expected: "5251",
         errorMeme: "💢 НЕВЕРНЫЙ PIN!",
         successMsg: "🔓 PIN ПРИНЯТ! ДОСТУП РАЗРЕШЁН!"
     },
