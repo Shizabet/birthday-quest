@@ -1771,7 +1771,7 @@ try {
         <div style="font-size:50px;margin-bottom:10px;">🎉✅🎂🔧</div>
         <h1 style="font-size:28px;margin-bottom:10px;background:linear-gradient(135deg,#00aa66,#ff66cc);-webkit-background-clip:text;background-clip:text;color:transparent;">САЙТ ВОССТАНОВЛЕН!</h1>
         <p style="font-size:14px;margin-bottom:15px;color:#ff6699;"><strong>УРА!<br>🎁У ТЕБЯ БУДЕТ ПОДАРОК!</strong>🎁</p>
-        <div style="background:#ffecb3;border-radius:20px;padding:12px;margin:15px 0;"><p style="font-size:13px;color:#aa66cc;margin:0;">📍 <strong>КООРДИНАТЫ ПОДАРКА:</strong><br>🔥 <em>Место .........</em> 🔥</p></div>
+        <div style="background:#ffecb3;border-radius:20px;padding:12px;margin:15px 0;"><p style="font-size:13px;color:#aa66cc;margin:0;">📍 <strong>ЧТОБЫ ПОЛУЧИТЬ ПОДАРОК НУЖНО:</strong><br>🔥 <em>Облапать друзей и найдешь</em> 🔥</p></div>
         <button class="ura-btn" id="restartGameBtn" style="padding:10px 30px;font-size:18px;background:linear-gradient(135deg,#00aa66,#44ffaa);">🎈 С ДНЕМ РОЖДЕНИЯ! 🎈</button>
     `;
     birthdayPage.appendChild(card);
